@@ -784,22 +784,26 @@ const MUSIC_VOLUME = 0.28;
 const FADE_MS = 1800;
 let fadeTimer = null;
 
-/* ramp the volume to a target over FADE_MS, then run an optional callback */
+/* Ramp the volume to a target over FADE_MS, then run an optional callback.
+   Progress is derived from the clock rather than from a step counter: a
+   background tab has its timers throttled to roughly one tick per second,
+   and counting steps there would stretch a 1.8s fade into about 30s — which
+   would leave music audible long after the user hit pause, since pause()
+   only runs once the fade finishes. Reading the clock keeps the fade honest
+   at any tick rate; a throttled tab just gets a coarser ramp. */
 function fadeTo(target, done){
   clearInterval(fadeTimer);
   const from = bgMusic.volume;
-  const steps = 36;
-  let i = 0;
+  const startedAt = Date.now();
   fadeTimer = setInterval(()=>{
-    i++;
-    const v = from + (target - from) * (i / steps);
-    bgMusic.volume = Math.min(1, Math.max(0, v));
-    if(i >= steps){
+    const t = Math.min(1, (Date.now() - startedAt) / FADE_MS);
+    bgMusic.volume = Math.min(1, Math.max(0, from + (target - from) * t));
+    if(t >= 1){
       clearInterval(fadeTimer);
       bgMusic.volume = Math.min(1, Math.max(0, target));
       if(done) done();
     }
-  }, FADE_MS / steps);
+  }, 50);
 }
 
 function playMusic(){
