@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="Join us in celebrating the wedding of Nnamdi &amp; Aisha on November 14th, 2026." />
+<title>Nnamdi &amp; Aisha — November 14th, 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Great+Vibes&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+/* ============================================================
+   ACHOM & AISHA — WEDDING INVITE
+   Palette: very light sky blue + white
+   Swap any [PLACEHOLDER] text with final client copy.
+   ============================================================ */
+:root{
+  --sky-50:  #F3F9FD;   /* lightest wash */
+  --sky-100: #EAF4FB;   /* main section background (was pastel yellow) */
+  --sky-200: #D8EAF7;   /* borders, soft fills */
+  --sky-300: #BBD9EE;   /* deeper accents */
+  --sky-600: #5B8DB8;   /* accent text, buttons */
+  --sky-700: #3F6E96;   /* button hover, links */
+  --ink:     #2B3A44;   /* headings */
+  --ink-soft:#5A6B76;   /* body text */
+  --white:   #FFFFFF;
+  --gold:      #C9A227; /* luxe accent */
+  --gold-soft: #E8C766;
+  --gold-deep: #A5851C;
+  --sand:      #F7F1E4; /* warm neutral wash */
+  --serif: 'Cormorant Garamond', Georgia, serif;
+  --display:'Playfair Display', 'Cormorant Garamond', Georgia, serif;
+  --sans:  'Jost', 'Segoe UI', sans-serif;
+  --script:'Great Vibes', 'Cormorant Garamond', cursive;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);color:var(--ink-soft);background:var(--white);font-weight:300;line-height:1.7;font-size:17px}
+img{max-width:100%;display:block}
+a{color:var(--sky-700);text-decoration:none}
+h1,h2,h3{font-family:var(--serif);color:var(--ink);font-weight:500;line-height:1.15}
+
+/* ---------- kickers & headings ---------- */
+.kicker{font-family:var(--sans);font-size:.78rem;letter-spacing:.35em;text-transform:uppercase;color:var(--sky-600);margin-bottom:.9rem;font-weight:500}
+.section-title{font-family:var(--display);font-size:clamp(2.2rem,4.8vw,3.2rem);font-weight:600;margin-bottom:2.5rem}
+section{padding:6rem 1.5rem}
+.wrap{max-width:1080px;margin:0 auto}
+.center{text-align:center}
+
+/* alternating backgrounds: white / light sky blue */
+.bg-sky{background:var(--sky-100)}
+.bg-white{background:var(--white)}
+
+/* ---------- nav ---------- */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--sky-200)}
+.nav-inner{max-width:1080px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:.9rem 1.5rem}
+.monogram{font-family:var(--serif);font-size:1.45rem;font-weight:600;color:var(--ink);letter-spacing:.05em}
+.nav-links{display:flex;gap:1.6rem;list-style:none;position:relative}
+.nav-links a{font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);transition:color .25s}
+.nav-links a:hover,.nav-links a.active{color:var(--sky-700)}
+.nav-indicator{position:absolute;bottom:-6px;left:0;width:0;height:2px;border-radius:2px;background:linear-gradient(90deg,var(--gold),var(--gold-soft));opacity:0;pointer-events:none;transition:left .35s cubic-bezier(.4,0,.2,1),width .35s cubic-bezier(.4,0,.2,1),opacity .3s}
+.nav-toggle{display:none;background:none;border:none;font-size:1.5rem;color:var(--ink);cursor:pointer}
+@media(max-width:860px){
+  .nav-toggle{display:block}
+  .nav-links{position:absolute;top:100%;left:0;right:0;background:var(--white);flex-direction:column;gap:0;border-bottom:1px solid var(--sky-200);display:none}
+  .nav-links.open{display:flex}
+  .nav-links li{border-top:1px solid var(--sky-100)}
+  .nav-links a{display:block;padding:.9rem 1.5rem}
+  .nav-indicator{display:none}
+}
+
+/* ---------- hero ---------- */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;background:
+  linear-gradient(rgba(234,244,251,.55),rgba(255,255,255,.9)), var(--sky-50);
+  padding:7rem 1.5rem 4rem;position:relative}
+.hero .kicker{margin-bottom:1.6rem}
+.hero-name{font-family:var(--script);font-size:clamp(3.6rem,11vw,7.2rem);font-weight:400;color:var(--sky-700);line-height:1;letter-spacing:.02em}
+.amp{font-family:var(--script);font-style:normal;font-size:clamp(2.4rem,6vw,4rem);color:var(--gold-deep);margin:-.2rem 0;line-height:1}
+.hero-line{width:120px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:2rem auto 1.2rem}
+.section-line{width:120px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:-1.4rem auto 2.4rem}
+.hero-date{font-size:.8rem;letter-spacing:.35em;text-transform:uppercase;color:var(--ink);font-weight:500}
+.hero-tag{margin-top:1.1rem;font-family:var(--script);font-style:normal;font-size:2.2rem;font-weight:400;color:var(--gold-deep)}
+.hashtag{margin-top:1.4rem;font-size:1.05rem;letter-spacing:.12em;font-weight:600;color:var(--sky-700)}
+
+/* ---------- countdown ---------- */
+.countdown{display:flex;gap:.8rem;justify-content:center;margin:2rem 0 .6rem;flex-wrap:wrap}
+.cd-box{min-width:78px;background:rgba(255,255,255,.55);border:1px solid var(--gold-soft);border-radius:12px;padding:.75rem .55rem;backdrop-filter:blur(5px);box-shadow:0 6px 20px rgba(201,162,39,.12)}
+.cd-num{font-family:var(--display);font-size:2rem;font-weight:600;color:var(--ink);line-height:1;font-variant-numeric:tabular-nums}
+.cd-label{font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--sky-600);margin-top:.4rem}
+@media(max-width:420px){.cd-box{min-width:64px;padding:.6rem .4rem}.cd-num{font-size:1.6rem}}
+.scroll-cue{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;color:var(--sky-600);animation:bob 2.2s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,8px)}}
+
+/* ---------- story timeline ---------- */
+.timeline{position:relative;max-width:900px;margin:0 auto}
+.timeline::before{content:"";position:absolute;left:50%;top:0;bottom:0;width:1px;background:linear-gradient(180deg,transparent,var(--gold-soft) 8%,var(--gold-soft) 92%,transparent);transform:translateX(-50%)}
+.story{display:flex;align-items:center;gap:3rem;margin-bottom:5rem;position:relative}
+.story:nth-child(even){flex-direction:row-reverse}
+.story-text,.story-img{flex:1}
+.story-year{font-size:.8rem;letter-spacing:.3em;text-transform:uppercase;color:var(--sky-600);margin-bottom:.5rem;font-weight:500}
+.story h3{font-size:1.7rem;margin-bottom:.8rem}
+.story-img .ph{aspect-ratio:4/3;border-radius:6px}
+.story-img img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:6px;box-shadow:0 10px 30px rgba(91,141,184,.15)}
+.dot{position:absolute;left:50%;top:50%;width:13px;height:13px;background:var(--gold);border:3px solid var(--white);border-radius:50%;transform:translate(-50%,-50%);box-shadow:0 0 0 1px var(--gold-soft),0 0 10px rgba(201,162,39,.5)}
+@media(max-width:760px){
+  .timeline::before{left:8px}
+  .story,.story:nth-child(even){flex-direction:column;gap:1.2rem;padding-left:2rem}
+  .dot{left:8px;top:6px}
+}
+
+/* ---------- image placeholder ---------- */
+.ph{background:repeating-linear-gradient(45deg,var(--sky-100),var(--sky-100) 12px,var(--sky-50) 12px,var(--sky-50) 24px);border:1px dashed var(--sky-300);display:flex;align-items:center;justify-content:center;color:var(--sky-600);font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;text-align:center;padding:1rem}
+
+/* ---------- details cards ---------- */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem;max-width:900px;margin:0 auto}
+.card{background:var(--white);border:1px solid var(--sky-200);border-radius:8px;padding:2.6rem 2.2rem;text-align:center;box-shadow:0 8px 30px rgba(91,141,184,.08)}
+.bg-white .card{background:var(--sky-50)}
+.card .kicker{margin-bottom:1.2rem}
+.card-date{font-size:.95rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink);margin-bottom:.2rem}
+.card-time{font-size:.9rem;color:var(--sky-600);margin-bottom:1rem}
+.card h3{font-size:1.55rem;font-weight:600;margin-bottom:.4rem}
+.card-note{font-family:var(--serif);font-style:italic;color:var(--ink-soft);margin:.8rem 0 1.4rem}
+.card-actions{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap}
+
+/* ---------- buttons ---------- */
+.btn{display:inline-block;padding:.7rem 1.7rem;border-radius:999px;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;transition:all .2s;cursor:pointer;border:1px solid var(--sky-600);font-family:var(--sans)}
+.btn-solid{background:var(--sky-600);color:var(--white)}
+.btn-solid:hover{background:var(--sky-700);border-color:var(--sky-700)}
+.btn-line{background:transparent;color:var(--sky-700)}
+.btn-line:hover{background:var(--sky-100)}
+
+/* ---------- registry ---------- */
+.registry-intro{max-width:640px;margin:0 auto 3rem}
+.reg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:1.8rem}
+.reg-card{background:var(--white);border:1px solid var(--sky-200);border-radius:8px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 6px 24px rgba(91,141,184,.07)}
+.reg-card .ph{aspect-ratio:1/1;border:none;border-bottom:1px dashed var(--sky-300)}
+.reg-img{aspect-ratio:1/1;width:100%;object-fit:cover;border-bottom:1px solid var(--sky-200)}
+.reg-body{padding:1.4rem;display:flex;flex-direction:column;gap:.5rem;flex:1}
+.reg-body h3{font-size:1.25rem}
+.reg-price{margin-top:auto;font-weight:500;color:var(--ink);letter-spacing:.05em}
+.reg-body .btn{margin-top:.8rem;align-self:flex-start}
+
+/* ---------- gallery (masonry — full photos, no cropping) ---------- */
+.gal-mosaic{column-count:4;column-gap:14px;max-width:1040px;margin:0 auto}
+@media(max-width:900px){.gal-mosaic{column-count:3}}
+@media(max-width:620px){.gal-mosaic{column-count:2;column-gap:10px}}
+.gal-photo{break-inside:avoid;margin:0 0 14px;background:var(--white);padding:8px;border:1px solid var(--sky-200);border-radius:4px;box-shadow:0 10px 26px rgba(43,58,68,.14);transition:transform .4s ease,box-shadow .4s ease;position:relative;cursor:pointer}
+.gal-photo img{width:100%;display:block;border-radius:2px}
+.gal-photo:nth-child(4n+1){transform:rotate(-2.2deg)}
+.gal-photo:nth-child(4n+2){transform:rotate(1.6deg);margin-top:-14px}
+.gal-photo:nth-child(4n+3){transform:rotate(-1deg)}
+.gal-photo:nth-child(4n){transform:rotate(2.4deg);margin-top:-10px}
+.gal-photo::after{content:"";position:absolute;inset:8px;border:1px solid rgba(201,162,39,.35);border-radius:2px;pointer-events:none;opacity:0;transition:opacity .4s}
+.gal-photo:hover{transform:rotate(0) scale(1.05);box-shadow:0 20px 46px rgba(43,58,68,.3);z-index:6}
+.gal-photo:hover::after{opacity:1}
+
+/* lightbox */
+.lightbox{position:fixed;inset:0;background:rgba(43,58,68,.9);z-index:300;display:none;align-items:center;justify-content:center;padding:1.5rem}
+.lightbox.open{display:flex}
+.lightbox img{max-width:92vw;max-height:88vh;border-radius:6px;box-shadow:0 20px 60px rgba(0,0,0,.5);border:6px solid var(--white)}
+.lb-close{position:absolute;top:1.1rem;right:1.4rem;font-size:2.2rem;color:var(--white);background:none;border:none;cursor:pointer;line-height:1}
+.lb-nav{position:absolute;top:50%;transform:translateY(-50%);font-size:2.6rem;color:var(--white);background:none;border:none;cursor:pointer;padding:.4rem 1rem;opacity:.8;transition:opacity .2s}
+.lb-nav:hover{opacity:1}
+.lb-prev{left:.4rem}.lb-next{right:.4rem}
+
+/* ---------- swatch (dress code / colours) ---------- */
+.swatch{display:flex;gap:.5rem;justify-content:center;align-items:center;margin:.2rem 0 .3rem;flex-wrap:wrap}
+.swatch-dot{width:26px;height:26px;border-radius:50%;border:2px solid var(--white);box-shadow:0 2px 8px rgba(43,58,68,.18),0 0 0 1px var(--sky-200)}
+.sample-tag{display:inline-block;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-deep);background:rgba(201,162,39,.12);border:1px solid var(--gold-soft);border-radius:999px;padding:.15rem .6rem;margin-bottom:.5rem}
+
+/* ---------- music toggle ---------- */
+.music-btn{position:fixed;bottom:1.2rem;right:1.2rem;z-index:150;width:48px;height:48px;border-radius:50%;background:var(--white);border:1px solid var(--gold-soft);box-shadow:0 6px 20px rgba(43,58,68,.2);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform .2s,box-shadow .2s}
+.music-btn:hover{transform:scale(1.08);box-shadow:0 10px 26px rgba(201,162,39,.3)}
+.music-btn svg{width:22px;height:22px;fill:var(--gold-deep)}
+.music-btn .bars{display:none}
+.music-btn.playing .note{display:none}
+.music-btn.playing .bars{display:block}
+.music-btn.playing .bars span{display:inline-block;width:3px;margin:0 1px;background:var(--gold-deep);border-radius:2px;animation:eq .9s ease-in-out infinite}
+.music-btn.playing .bars span:nth-child(2){animation-delay:.2s}
+.music-btn.playing .bars span:nth-child(3){animation-delay:.4s}
+@keyframes eq{0%,100%{height:7px}50%{height:18px}}
+
+/* ---------- contacts ---------- */
+.contacts{display:flex;flex-direction:column;gap:.6rem;align-items:center}
+.contact{font-size:1rem;letter-spacing:.08em}
+.contact strong{color:var(--ink);text-transform:uppercase;letter-spacing:.2em;font-weight:500;font-size:.85rem;margin-right:.6rem}
+
+/* ---------- rsvp ---------- */
+.rsvp-box{max-width:520px;margin:0 auto;background:var(--white);border:1px solid var(--sky-200);border-radius:8px;padding:2.8rem 2.4rem;box-shadow:0 8px 30px rgba(91,141,184,.08)}
+.rsvp-deadline{font-family:var(--serif);font-style:italic;margin-bottom:2rem}
+.field{margin-bottom:1.6rem;text-align:left}
+.field label{display:block;font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ink);margin-bottom:.5rem;font-weight:500}
+.field input[type=text]{width:100%;padding:.85rem 1rem;border:1px solid var(--sky-200);border-radius:4px;font-family:var(--sans);font-size:1rem;color:var(--ink);background:var(--sky-50)}
+.field input[type=text]:focus{outline:none;border-color:var(--sky-600)}
+.radio-row{display:flex;gap:1rem;flex-wrap:wrap}
+.radio-pill{flex:1;min-width:180px}
+.radio-pill input{display:none}
+.radio-pill span{display:block;padding:.85rem 1rem;border:1px solid var(--sky-200);border-radius:4px;text-align:center;cursor:pointer;font-size:.9rem;transition:all .2s;background:var(--sky-50)}
+.radio-pill input:checked + span{background:var(--sky-600);color:var(--white);border-color:var(--sky-600)}
+.rsvp-box .btn{width:100%;margin-top:.4rem}
+.rsvp-msg{margin-top:1.2rem;font-family:var(--serif);font-style:italic;color:var(--sky-700);display:none}
+
+/* ---------- footer ---------- */
+footer{background:var(--sky-100);text-align:center;padding:4rem 1.5rem;border-top:1px solid var(--sky-200)}
+.foot-names{font-family:var(--serif);font-size:1.8rem;font-weight:600;color:var(--ink);margin-bottom:.4rem}
+.foot-date{font-size:.85rem;letter-spacing:.25em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:1.2rem}
+footer .hashtag{margin-top:1rem}
+
+/* ---------- gift modal ---------- */
+.modal-overlay{position:fixed;inset:0;background:rgba(43,58,68,.55);z-index:200;display:none;align-items:center;justify-content:center;padding:1.2rem}
+.modal-overlay.open{display:flex}
+.modal{background:var(--white);border-radius:10px;max-width:440px;width:100%;max-height:90vh;overflow-y:auto;padding:2.4rem 2.2rem;position:relative;text-align:center;box-shadow:0 20px 60px rgba(43,58,68,.25)}
+.modal-close{position:absolute;top:.9rem;right:1.1rem;background:none;border:none;font-size:1.5rem;color:var(--ink-soft);cursor:pointer;line-height:1}
+.modal .kicker{margin-bottom:.6rem}
+.modal h3{font-size:1.8rem;margin-bottom:1.4rem}
+.acct-box{background:var(--sky-100);border:1px solid var(--sky-200);border-radius:8px;padding:1.3rem 1.1rem;margin-bottom:1.6rem}
+.acct-label{font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--sky-600);font-weight:500}
+.acct-num{font-family:var(--sans);font-size:1.6rem;font-weight:600;color:var(--ink);letter-spacing:.08em;margin:.2rem 0 .6rem}
+.acct-name{font-size:.95rem;color:var(--ink);margin-bottom:.2rem}
+.acct-bank{font-size:.9rem;color:var(--ink-soft);margin-bottom:.9rem}
+.copy-btn{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;background:var(--white);border:1px solid var(--sky-600);color:var(--sky-700);border-radius:999px;padding:.45rem 1.2rem;cursor:pointer;transition:all .2s;font-family:var(--sans)}
+.copy-btn:hover{background:var(--sky-600);color:var(--white)}
+.modal .field{margin-bottom:1.2rem}
+.modal textarea{width:100%;padding:.85rem 1rem;border:1px solid var(--sky-200);border-radius:4px;font-family:var(--sans);font-size:1rem;color:var(--ink);background:var(--sky-50);min-height:90px;resize:vertical}
+.modal textarea:focus{outline:none;border-color:var(--sky-600)}
+.gift-msg{margin-top:1.1rem;font-family:var(--serif);font-style:italic;color:var(--sky-700);display:none}
+
+/* ---------- blinking wedding hashtag ---------- */
+.blink{animation:blink 1.6s ease-in-out infinite}
+@keyframes blink{
+  0%,100%{color:#C9A227;text-shadow:0 0 6px rgba(201,162,39,.55)}
+  50%{color:#E8C766;text-shadow:0 0 14px rgba(232,199,102,.9)}
+}
+@media(prefers-reduced-motion:reduce){.blink{animation:none;color:#C9A227}}
+
+/* ---------- reveal on scroll (visible by default — JS adds the animation) ---------- */
+.reveal{opacity:1;transform:none;transition:opacity .7s ease,transform .7s ease}
+.js .reveal{opacity:0;transform:translateY(24px)}
+.js .reveal.in{opacity:1;transform:none}
+</style>
+</head>
+<body>
+
+<!-- ================= NAV ================= -->
+<nav>
+  <div class="nav-inner">
+    <a class="monogram blink" href="#home">foreverNAszn2026</a>
+    <button class="nav-toggle" aria-label="Menu" onclick="document.getElementById('navlinks').classList.toggle('open')">&#9776;</button>
+    <ul class="nav-links" id="navlinks">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#our-story">Our Story</a></li>
+      <li><a href="#details">Details</a></li>
+      <li><a href="#registry">Registry</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#rsvp">RSVP</a></li>
+      <span class="nav-indicator" id="navIndicator"></span>
+    </ul>
+  </div>
+</nav>
+
+<!-- ================= HERO ================= -->
+<header class="hero" id="home">
+  <p class="kicker">Together with their families</p>
+  <h1 class="hero-name">Nnamdi</h1>
+  <p class="amp">&amp;</p>
+  <h1 class="hero-name">Aisha</h1>
+  <div class="hero-line"></div>
+  <p class="hero-date">November 14th, 2026</p>
+  <div class="countdown" id="countdown" aria-label="Countdown to the wedding day">
+    <div class="cd-box"><div class="cd-num" id="cd-days">--</div><div class="cd-label">Days</div></div>
+    <div class="cd-box"><div class="cd-num" id="cd-hours">--</div><div class="cd-label">Hours</div></div>
+    <div class="cd-box"><div class="cd-num" id="cd-mins">--</div><div class="cd-label">Minutes</div></div>
+    <div class="cd-box"><div class="cd-num" id="cd-secs">--</div><div class="cd-label">Seconds</div></div>
+  </div>
+  <p class="hero-tag">Forever starts here</p>
+  <p class="hashtag blink">#foreverNAszn2026</p>
+  <div class="scroll-cue">Scroll</div>
+</header>
+
+<!-- ================= OUR STORY ================= -->
+<section class="bg-sky" id="our-story">
+  <div class="wrap center">
+    <p class="kicker">How we found forever</p>
+    <h2 class="section-title">The Story of Us</h2>
+  </div>
+  <div class="timeline">
+
+    <div class="story reveal">
+      <div class="story-text">
+        <p class="story-year">2023</p>
+        <h3>How We Met</h3>
+        <p><strong>Her:</strong> I met him on my way to work on the first day of resumption. He entered the same &lsquo;keke&rsquo; I was in and I was smitten by his aura, right there I knew I was going to make him mine. We came down in front of the office, and he didn&rsquo;t have the complete T-fare, so I volunteered to pay for him.</p>
+        <p><strong>Him:</strong> A colleague in the office told me about a new girl the company just hired, and I should check her out, I told him we entered the same &lsquo;keke&rsquo; while coming to work. So, we had our usual Friday happy hour organized by the director, there she was beautiful and shy. I took interest immediately.</p>
+      </div>
+      <span class="dot"></span>
+      <div class="story-img"><img src="images/story-1.jpeg" alt="How We Met" loading="lazy" /></div>
+    </div>
+
+    <div class="story reveal">
+      <div class="story-text">
+        <p class="story-year">Early 2024</p>
+        <h3>The Journey</h3>
+        <p>Nothing about us was hurried. What began as a workplace friendship kept deepening quietly - a message here, a birthday wish there, little moments that always found their way back to each other. Then came a company outing in March 2024, where one conversation flowed so easily it felt like we had never been apart.</p>
+      </div>
+      <span class="dot"></span>
+      <div class="story-img"><img src="images/story-2.jpeg" alt="The Journey" loading="lazy" /></div>
+    </div>
+
+    <div class="story reveal">
+      <div class="story-text">
+        <p class="story-year">Late 2024</p>
+        <h3>When Everything Changed</h3>
+        <p><strong>Her:</strong> It started with a message he sent after my birthday. The message turned into a video call, and the call opened a door neither of us wanted to close. Before long our weekends belonged to each other, and the days apart began to feel too long. One evening after a hangout, he told me plainly what he believed: that everyone has their person, and he had found his in me. Hearing that settled something in me. I knew what it was to give love and not feel it returned the same way, so his certainty meant the world.</p>
+        <p><strong>Him:</strong> I knew words alone would never be enough for her. So I chose patience, I chose calm, and I let my actions speak every single day until she never had to wonder.</p>
+      </div>
+      <span class="dot"></span>
+      <div class="story-img"><img src="images/story-3.jpeg" alt="When Everything Changed" loading="lazy" /></div>
+    </div>
+
+    <div class="story reveal">
+      <div class="story-text">
+        <p class="story-year">2025 - Present</p>
+        <h3>What Makes Us, Us</h3>
+        <p>Friendship, patience, and peace - that is the ground we stand on. We did not drift into each other; we picked each other, deliberately, and we keep picking each other every day. Over two years on, we have learnt each other with calm and understanding. Nnamdi&rsquo;s steady, easy nature keeps us balanced, and what we have built together is strong, safe, and rooted in real respect. Young as we are, we know exactly what we want - and we have found it in each other.</p>
+      </div>
+      <span class="dot"></span>
+      <div class="story-img"><img src="images/story-4.jpeg" alt="What Makes Us, Us" loading="lazy" /></div>
+    </div>
+
+    <div class="story reveal">
+      <div class="story-text">
+        <p class="story-year">Forever</p>
+        <h3>The Next Chapter</h3>
+        <p>So after all the friendship, the growing, and the choosing, forever was the only answer left. We are stepping into the life ahead with open hearts - two people learning, stretching, and becoming better side by side. Ours is more than a romance. It is proof of friendship, of certainty, and of the quiet strength in choosing the same person every single morning.</p>
+      </div>
+      <span class="dot"></span>
+      <div class="story-img"><img src="images/story-5.jpeg" alt="The Next Chapter" loading="lazy" /></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ================= DETAILS ================= -->
+<section class="bg-white" id="details">
+  <div class="wrap center">
+    <p class="kicker">When &amp; Where</p>
+    <h2 class="section-title">Event Details</h2>
+    <div class="cards">
+
+      <div class="card reveal">
+        <p class="kicker">Engagement</p>
+        <p class="card-date">November 14th, 2026</p>
+        <p class="card-time">10:00 AM</p>
+        <h3>Union Bank Hall</h3>
+        <p>Sickle Cell Foundation Nigeria, Idi-Araba, Opp. LUTH, Surulere, Lagos</p>
+        <span class="sample-tag">Sample — awaiting confirmation</span>
+        <div class="swatch">
+          <span class="swatch-dot" style="background:#2B3A44" title="Charcoal"></span>
+          <span class="swatch-dot" style="background:#5B8DB8" title="Blue"></span>
+          <span class="swatch-dot" style="background:#F7F1E4" title="Ivory"></span>
+        </div>
+        <p class="card-note">Dress Code: Dressy — Cocktail Elegant</p>
+        <div class="card-actions">
+          <a class="btn btn-solid" href="https://maps.app.goo.gl/bqJSsfzdNKzLtRHk7" target="_blank" rel="noopener">View on map</a>
+          <a class="btn btn-line" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Nnamdi%20%26%20Aisha%20Wedding%20%E2%80%94%20Engagement&amp;dates=20261114T100000/20261114T120000&amp;ctz=Africa/Lagos&amp;location=Union%20Bank%20Hall%2C%20Sickle%20Cell%20Foundation%20Nigeria%2C%20Idi-Araba%2C%20Opp.%20LUTH%2C%20Surulere%2C%20Lagos&amp;details=We%20can%27t%20wait%20to%20celebrate%20with%20you%21%20%23foreverNAszn2026" target="_blank" rel="noopener">Add to calendar</a>
+        </div>
+      </div>
+
+      <div class="card reveal">
+        <p class="kicker">Reception</p>
+        <p class="card-date">November 14th, 2026</p>
+        <p class="card-time">1:00 PM</p>
+        <h3>Union Bank Hall</h3>
+        <p>Sickle Cell Foundation Nigeria, Idi-Araba, Opp. LUTH, Surulere, Lagos</p>
+        <span class="sample-tag">Sample — awaiting confirmation</span>
+        <div class="swatch">
+          <span class="swatch-dot" style="background:#BBD9EE" title="Sky Blue"></span>
+          <span class="swatch-dot" style="background:#FFFFFF" title="White"></span>
+          <span class="swatch-dot" style="background:#C9A227" title="Gold"></span>
+        </div>
+        <p class="card-note">Colours of the Day: Sky Blue, White &amp; Gold</p>
+        <div class="card-actions">
+          <a class="btn btn-solid" href="https://maps.app.goo.gl/bqJSsfzdNKzLtRHk7" target="_blank" rel="noopener">View on map</a>
+          <a class="btn btn-line" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Nnamdi%20%26%20Aisha%20Wedding%20%E2%80%94%20Reception&amp;dates=20261114T130000/20261114T170000&amp;ctz=Africa/Lagos&amp;location=Union%20Bank%20Hall%2C%20Sickle%20Cell%20Foundation%20Nigeria%2C%20Idi-Araba%2C%20Opp.%20LUTH%2C%20Surulere%2C%20Lagos&amp;details=We%20can%27t%20wait%20to%20celebrate%20with%20you%21%20%23foreverNAszn2026" target="_blank" rel="noopener">Add to calendar</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= REGISTRY ================= -->
+<section class="bg-sky" id="registry">
+  <div class="wrap center">
+    <p class="kicker">A little something</p>
+    <h2 class="section-title">Gift Registry</h2>
+    <div class="section-line"></div>
+    <p class="registry-intro">Your presence at our wedding is the greatest gift of all. Still, if you would like to bless us with something more, we have put together a list of items and experiences we are saving towards as we begin our life together. Every contribution, big or small, means more to us than you know.</p>
+    <div class="reg-grid">
+
+      <div class="reg-card reveal">
+        <img class="reg-img" src="images/registry-monetary.jpg" alt="Monetary Gifts" onerror="this.outerHTML='&lt;div class=&quot;ph&quot; style=&quot;aspect-ratio:1/1&quot;&gt;Image — Monetary Gifts&lt;/div&gt;'" />
+        <div class="reg-body">
+          <h3>Monetary Gifts</h3>
+          <p>Every kind contribution towards our new home and the life we are building together.</p>
+          <p class="reg-price">Any amount</p>
+          <a class="btn btn-line" href="#" onclick="openGift();return false;">Contribute</a>
+        </div>
+      </div>
+
+      <div class="reg-card reveal">
+        <img class="reg-img" src="images/registry-bedframe.jpg" alt="Bed Frame" onerror="this.outerHTML='&lt;div class=&quot;ph&quot; style=&quot;aspect-ratio:1/1&quot;&gt;Image — Bed Frame&lt;/div&gt;'" />
+        <div class="reg-body">
+          <h3>Bed Frame</h3>
+          <p>A solid, beautiful bed frame to anchor our new bedroom.</p>
+          <p class="reg-price">₦600,000</p>
+          <a class="btn btn-line" href="#" onclick="openGift();return false;">Contribute</a>
+        </div>
+      </div>
+
+      <div class="reg-card reveal">
+        <img class="reg-img" src="images/registry-wardrobe.jpg" alt="Wardrobe" onerror="this.outerHTML='&lt;div class=&quot;ph&quot; style=&quot;aspect-ratio:1/1&quot;&gt;Image — Wardrobe&lt;/div&gt;'" />
+        <div class="reg-body">
+          <h3>Wardrobe</h3>
+          <p>Roomy storage to keep our new home organised from day one.</p>
+          <p class="reg-price">₦750,000</p>
+          <a class="btn btn-line" href="#" onclick="openGift();return false;">Contribute</a>
+        </div>
+      </div>
+
+      <div class="reg-card reveal">
+        <img class="reg-img" src="images/registry-washer.jpg" alt="Hisense 10.5kg Automatic Washer" onerror="this.outerHTML='&lt;div class=&quot;ph&quot; style=&quot;aspect-ratio:1/1&quot;&gt;Image — Washer&lt;/div&gt;'" />
+        <div class="reg-body">
+          <h3>Hisense 10.5 Automatic Washer</h3>
+          <p>Takes laundry day off our hands as we settle in.</p>
+          <p class="reg-price">₦700,000</p>
+          <a class="btn btn-line" href="#" onclick="openGift();return false;">Contribute</a>
+        </div>
+      </div>
+
+      <div class="reg-card reveal">
+        <img class="reg-img" src="images/registry-fridge.jpg" alt="LG Top Freezer Refrigerator 266L" onerror="this.outerHTML='&lt;div class=&quot;ph&quot; style=&quot;aspect-ratio:1/1&quot;&gt;Image — Refrigerator&lt;/div&gt;'" />
+        <div class="reg-body">
+          <h3>LG Top Freezer Refrigerator (266L)</h3>
+          <p>Cold drinks, fresh food and enough room for hosting.</p>
+          <p class="reg-price">₦550,000</p>
+          <a class="btn btn-line" href="#" onclick="openGift();return false;">Contribute</a>
+        </div>
+      </div>
+
+      <div class="reg-card reveal">
+        <img class="reg-img" src="images/registry-couch.jpg" alt="L-Shaped Couch" onerror="this.outerHTML='&lt;div class=&quot;ph&quot; style=&quot;aspect-ratio:1/1&quot;&gt;Image — Couch&lt;/div&gt;'" />
+        <div class="reg-body">
+          <h3>L-Shaped Couch</h3>
+          <p>Where movie nights and long conversations will happen.</p>
+          <p class="reg-price">₦550,000</p>
+          <a class="btn btn-line" href="#" onclick="openGift();return false;">Contribute</a>
+        </div>
+      </div>
+
+      <div class="reg-card reveal">
+        <img class="reg-img" src="images/registry-airfryer.jpg" alt="Air Fryer" onerror="this.outerHTML='&lt;div class=&quot;ph&quot; style=&quot;aspect-ratio:1/1&quot;&gt;Image — Air Fryer&lt;/div&gt;'" />
+        <div class="reg-body">
+          <h3>Air Fryer</h3>
+          <p>Fast, healthy meals on the busiest weeknights.</p>
+          <p class="reg-price">₦107,000</p>
+          <a class="btn btn-line" href="#" onclick="openGift();return false;">Contribute</a>
+        </div>
+      </div>
+
+      <div class="reg-card reveal">
+        <img class="reg-img" src="images/registry-fan.jpg" alt="Rechargeable Fan" onerror="this.outerHTML='&lt;div class=&quot;ph&quot; style=&quot;aspect-ratio:1/1&quot;&gt;Image — Rechargeable Fan&lt;/div&gt;'" />
+        <div class="reg-body">
+          <h3>Rechargeable Fan</h3>
+          <p>Steady comfort whenever the power takes a break.</p>
+          <p class="reg-price">₦179,100</p>
+          <a class="btn btn-line" href="#" onclick="openGift();return false;">Contribute</a>
+        </div>
+      </div>
+
+      <div class="reg-card reveal">
+        <img class="reg-img" src="images/registry-vacuum.jpg" alt="Vacuum Cleaner" onerror="this.outerHTML='&lt;div class=&quot;ph&quot; style=&quot;aspect-ratio:1/1&quot;&gt;Image — Vacuum Cleaner&lt;/div&gt;'" />
+        <div class="reg-body">
+          <h3>Vacuum Cleaner</h3>
+          <p>Keeps the floors spotless without eating the whole weekend.</p>
+          <p class="reg-price">₦142,000</p>
+          <a class="btn btn-line" href="#" onclick="openGift();return false;">Contribute</a>
+        </div>
+      </div>
+
+      <div class="reg-card reveal">
+        <img class="reg-img" src="images/registry-tv.jpg" alt="Hisense 58-inch Smart TV" onerror="this.outerHTML='&lt;div class=&quot;ph&quot; style=&quot;aspect-ratio:1/1&quot;&gt;Image — Smart TV&lt;/div&gt;'" />
+        <div class="reg-body">
+          <h3>Hisense 58-inch Smart TV</h3>
+          <p>Match days, movie marathons and lazy Sundays sorted.</p>
+          <p class="reg-price">₦580,000</p>
+          <a class="btn btn-line" href="#" onclick="openGift();return false;">Contribute</a>
+        </div>
+      </div>
+
+      <div class="reg-card reveal">
+        <img class="reg-img" src="images/registry-generator.jpg" alt="Generator" onerror="this.outerHTML='&lt;div class=&quot;ph&quot; style=&quot;aspect-ratio:1/1&quot;&gt;Image — Generator&lt;/div&gt;'" />
+        <div class="reg-body">
+          <h3>Generator (3.5kVA)</h3>
+          <p>Reliable backup power so home never goes dark.</p>
+          <p class="reg-price">₦580,000</p>
+          <a class="btn btn-line" href="#" onclick="openGift();return false;">Contribute</a>
+        </div>
+      </div>
+
+      <div class="reg-card reveal">
+        <img class="reg-img" src="images/registry-ac.jpg" alt="Air Conditioner 1.5HP Split Unit" onerror="this.outerHTML='&lt;div class=&quot;ph&quot; style=&quot;aspect-ratio:1/1&quot;&gt;Image — Air Conditioner&lt;/div&gt;'" />
+        <div class="reg-body">
+          <h3>Air Conditioner (1.5HP Split)</h3>
+          <p>Cool, restful nights through every heatwave.</p>
+          <p class="reg-price">₦420,000</p>
+          <a class="btn btn-line" href="#" onclick="openGift();return false;">Contribute</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= GALLERY ================= -->
+<section class="bg-white" id="gallery">
+  <div class="wrap center">
+    <p class="kicker">Moments</p>
+    <h2 class="section-title">Gallery</h2>
+    <div class="section-line"></div>
+    <div class="gal-mosaic">
+      <figure class="gal-photo" onclick="openLightbox(0)"><img src="images/gal-01.jpg" alt="Nnamdi & Aisha" loading="lazy" /></figure>
+      <figure class="gal-photo" onclick="openLightbox(1)"><img src="images/gal-02.jpg" alt="Nnamdi & Aisha" loading="lazy" /></figure>
+      <figure class="gal-photo" onclick="openLightbox(2)"><img src="images/gal-03.jpg" alt="Nnamdi & Aisha" loading="lazy" /></figure>
+      <figure class="gal-photo" onclick="openLightbox(3)"><img src="images/gal-04.jpg" alt="Nnamdi & Aisha" loading="lazy" /></figure>
+      <figure class="gal-photo" onclick="openLightbox(4)"><img src="images/gal-05.jpg" alt="Nnamdi & Aisha" loading="lazy" /></figure>
+      <figure class="gal-photo" onclick="openLightbox(5)"><img src="images/gal-06.jpg" alt="Nnamdi & Aisha" loading="lazy" /></figure>
+      <figure class="gal-photo" onclick="openLightbox(6)"><img src="images/gal-07.jpg" alt="Nnamdi & Aisha" loading="lazy" /></figure>
+      <figure class="gal-photo" onclick="openLightbox(7)"><img src="images/gal-08.jpg" alt="Nnamdi & Aisha" loading="lazy" /></figure>
+      <figure class="gal-photo" onclick="openLightbox(8)"><img src="images/gal-09.jpg" alt="Nnamdi & Aisha" loading="lazy" /></figure>
+      <figure class="gal-photo" onclick="openLightbox(9)"><img src="images/gal-10.jpg" alt="Nnamdi & Aisha" loading="lazy" /></figure>
+      <figure class="gal-photo" onclick="openLightbox(10)"><img src="images/gal-11.jpg" alt="Nnamdi & Aisha" loading="lazy" /></figure>
+      <figure class="gal-photo" onclick="openLightbox(11)"><img src="images/gal-12.jpg" alt="Nnamdi & Aisha" loading="lazy" /></figure>
+    </div>
+  </div>
+</section>
+
+<!-- ================= DIRECTIONS / FAQ ================= -->
+<section class="bg-sky" id="faq">
+  <div class="wrap center">
+    <p class="kicker">Need Help?</p>
+    <h2 class="section-title">Need Directions?</h2>
+    <div class="contacts">
+      <p class="contact"><strong>Onyinye</strong> <a href="tel:08063780961">0806 378 0961</a></p>
+      <p class="contact"><strong>Zainab</strong> <a href="tel:08133202096">0813 320 2096</a></p>
+      <p class="contact"><strong>Abebi</strong> <a href="tel:08144235893">0814 423 5893</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= RSVP ================= -->
+<section class="bg-white" id="rsvp">
+  <div class="wrap center">
+    <p class="kicker">We hope you can make it</p>
+    <h2 class="section-title">RSVP</h2>
+    <div class="rsvp-box reveal">
+      <p class="rsvp-deadline">Kindly respond by [RSVP DEADLINE]</p>
+      <form id="rsvpForm" onsubmit="return handleRsvp(event)">
+        <div class="field">
+          <label for="fullname">Full Name</label>
+          <input type="text" id="fullname" name="fullname" required />
+        </div>
+        <div class="field">
+          <label>Will you attend?</label>
+          <div class="radio-row">
+            <label class="radio-pill">
+              <input type="radio" name="attend" value="accept" required />
+              <span>Joyfully Accept</span>
+            </label>
+            <label class="radio-pill">
+              <input type="radio" name="attend" value="decline" />
+              <span>Regretfully Decline</span>
+            </label>
+          </div>
+        </div>
+        <button class="btn btn-solid" type="submit">Send RSVP</button>
+        <p class="rsvp-msg" id="rsvpMsg">Thank you! Your response has been noted.</p>
+      </form>
+      <!-- NOTE FOR DEV: wire this form to Formspree, Google Forms, or a
+           WhatsApp deep link before launch. Currently front-end only. -->
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <p class="foot-names">Nnamdi &amp; Aisha</p>
+  <p class="foot-date">November 14th, 2026</p>
+  <a href="#registry">Gift registry — bank transfer</a>
+  <p class="hashtag blink">#foreverNAszn2026</p>
+</footer>
+
+<!-- ================= LIGHTBOX ================= -->
+<div class="lightbox" id="lightbox" onclick="if(event.target===this)closeLightbox()">
+  <button class="lb-close" aria-label="Close" onclick="closeLightbox()">&times;</button>
+  <button class="lb-nav lb-prev" aria-label="Previous" onclick="lbStep(-1)">&#8249;</button>
+  <img id="lb-img" src="" alt="Gallery photo" />
+  <button class="lb-nav lb-next" aria-label="Next" onclick="lbStep(1)">&#8250;</button>
+</div>
+
+<!-- ================= MUSIC ================= -->
+<audio id="bgMusic" loop preload="auto" src="audio/wedding-ambience.mp3"></audio>
+<button class="music-btn" id="musicBtn" aria-label="Play music" title="Play music" onclick="toggleMusic()">
+  <svg class="note" viewBox="0 0 24 24"><path d="M12 3v10.55A4 4 0 1 0 14 17V7h4V3h-6z"/></svg>
+  <span class="bars" aria-hidden="true"><span style="height:10px"></span><span style="height:16px"></span><span style="height:8px"></span></span>
+</button>
+
+<!-- ================= GIFT MODAL ================= -->
+<div class="modal-overlay" id="giftModal" onclick="if(event.target===this)closeGift()">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="giftTitle">
+    <button class="modal-close" aria-label="Close" onclick="closeGift()">&times;</button>
+    <p class="kicker">With love</p>
+    <h3 id="giftTitle">Send a Gift</h3>
+    <div class="acct-box">
+      <p class="acct-label">Account Number</p>
+      <p class="acct-num" id="acctNum">0068229840</p>
+      <p class="acct-name">Ahmed Aisha</p>
+      <p class="acct-bank">Stanbic IBTC</p>
+      <button class="copy-btn" onclick="copyAcct(this)">Copy account number</button>
+    </div>
+    <form id="giftForm" onsubmit="return handleGift(event)">
+      <div class="field">
+        <label for="gifterName">Your Name</label>
+        <input type="text" id="gifterName" name="gifterName" required />
+      </div>
+      <div class="field">
+        <label for="gifterMsg">Message <span style="text-transform:none;letter-spacing:0;color:var(--ink-soft)">(optional)</span></label>
+        <textarea id="gifterMsg" name="gifterMsg" placeholder="Drop a kind word for the couple..."></textarea>
+      </div>
+      <button class="btn btn-solid" type="submit" style="width:100%">Send</button>
+      <p class="gift-msg" id="giftMsg">Thank you for the love! It means the world to us.</p>
+    </form>
+    <!-- NOTE FOR DEV: wire this form to Formspree / Google Sheets / WhatsApp
+         before launch so the couple actually receives the gifter's name and message.
+         Currently front-end only. -->
+  </div>
+</div>
+
+<script>
+/* Enable JS-only animations. If this script ever fails to load or parse,
+   the "js" class is never added, so every .reveal element stays visible
+   and no content can be accidentally hidden. */
+document.documentElement.classList.add('js');
+
+/* tiny helper — getElementById by id */
+function $(id){ return document.getElementById(id); }
+
+/* reveal on scroll */
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+/* close mobile nav after click */
+document.querySelectorAll('.nav-links a').forEach(a=>{
+  a.addEventListener('click',()=>document.getElementById('navlinks').classList.remove('open'));
+});
+
+/* sliding underline that follows the active section */
+(function(){
+  const links = Array.from(document.querySelectorAll('.nav-links a'));
+  const indicator = document.getElementById('navIndicator');
+  const sections = links.map(a=>document.querySelector(a.getAttribute('href')));
+  let activeLink = null;
+  function moveTo(a){
+    if(!a){ indicator.style.opacity=0; return; }
+    indicator.style.left = a.offsetLeft + 'px';
+    indicator.style.width = a.offsetWidth + 'px';
+    indicator.style.opacity = 1;
+  }
+  function updateActive(){
+    const mark = window.scrollY + window.innerHeight*0.32;
+    let current = links[0];
+    sections.forEach((sec,i)=>{ if(sec && sec.offsetTop <= mark) current = links[i]; });
+    if(current !== activeLink){
+      activeLink = current;
+      links.forEach(l=>l.classList.remove('active'));
+      current.classList.add('active');
+      moveTo(current);
+    }
+  }
+  window.addEventListener('scroll', updateActive, {passive:true});
+  window.addEventListener('resize', ()=>moveTo(activeLink));
+  window.addEventListener('load', updateActive);
+  // underline follows hover, returns to active section on leave
+  links.forEach(a=>a.addEventListener('mouseenter',()=>moveTo(a)));
+  document.querySelector('.nav-links').addEventListener('mouseleave',()=>moveTo(activeLink));
+  updateActive();
+})();
+
+/* gift modal */
+function openGift(){
+  document.getElementById('giftModal').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeGift(){
+  document.getElementById('giftModal').classList.remove('open');
+  document.body.style.overflow='';
+}
+document.addEventListener('keydown',e=>{ if(e.key==='Escape')closeGift(); });
+function copyAcct(btn){
+  const num=document.getElementById('acctNum').textContent.trim();
+  const done=()=>{ btn.textContent='Copied!'; setTimeout(()=>btn.textContent='Copy account number',2000); };
+  if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(num).then(done); }
+  else{ const t=document.createElement('textarea'); t.value=num; document.body.appendChild(t); t.select(); document.execCommand('copy'); t.remove(); done(); }
+}
+function handleGift(e){
+  e.preventDefault();
+  document.getElementById('giftMsg').style.display='block';
+  e.target.querySelector('button[type=submit]').disabled=true;
+  return false;
+}
+
+/* rsvp — front-end only until a backend/form service is wired in */
+function handleRsvp(e){
+  e.preventDefault();
+  document.getElementById('rsvpMsg').style.display='block';
+  e.target.querySelector('button[type=submit]').disabled=true;
+  return false;
+}
+
+/* countdown to the wedding (Nov 14 2026, 10:00 WAT / UTC+1) */
+(function(){
+  const target = new Date('2026-11-14T10:00:00+01:00').getTime();
+  function pad(n){ return String(n).padStart(2,'0'); }
+  function tick(){
+    const diff = target - Date.now();
+    if(diff <= 0){
+      $('cd-days').textContent='0'; $('cd-hours').textContent='00';
+      $('cd-mins').textContent='00'; $('cd-secs').textContent='00';
+      return;
+    }
+    const d = Math.floor(diff/86400000);
+    const h = Math.floor(diff%86400000/3600000);
+    const m = Math.floor(diff%3600000/60000);
+    const s = Math.floor(diff%60000/1000);
+    $('cd-days').textContent=d;
+    $('cd-hours').textContent=pad(h);
+    $('cd-mins').textContent=pad(m);
+    $('cd-secs').textContent=pad(s);
+  }
+  tick(); setInterval(tick,1000);
+})();
+
+/* lightbox */
+const galleryImgs = Array.from(document.querySelectorAll('.gal-mosaic img')).map(i=>i.src);
+let lbIndex = 0;
+function openLightbox(i){
+  lbIndex = i;
+  document.getElementById('lb-img').src = galleryImgs[i];
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeLightbox(){
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow='';
+}
+function lbStep(dir){
+  lbIndex = (lbIndex + dir + galleryImgs.length) % galleryImgs.length;
+  document.getElementById('lb-img').src = galleryImgs[lbIndex];
+}
+document.addEventListener('keydown',e=>{
+  if(!document.getElementById('lightbox').classList.contains('open'))return;
+  if(e.key==='Escape')closeLightbox();
+  if(e.key==='ArrowRight')lbStep(1);
+  if(e.key==='ArrowLeft')lbStep(-1);
+});
+
+/* background music — autoplay on loop until the user stops it */
+const bgMusic = document.getElementById('bgMusic');
+const musicBtn = document.getElementById('musicBtn');
+let musicStopped = false;
+function playMusic(){
+  bgMusic.volume = 0.6;
+  return bgMusic.play().then(()=>{
+    musicBtn.classList.add('playing');
+    musicBtn.setAttribute('aria-label','Pause music');
+    musicBtn.title='Pause music';
+  });
+}
+function pauseMusic(){
+  bgMusic.pause();
+  musicBtn.classList.remove('playing');
+  musicBtn.setAttribute('aria-label','Play music');
+  musicBtn.title='Play music';
+}
+function toggleMusic(){
+  if(bgMusic.paused){ musicStopped=false; playMusic().catch(()=>{}); }
+  else { musicStopped=true; pauseMusic(); }
+}
+window.addEventListener('load', ()=>{ if(!musicStopped) playMusic().catch(()=>{}); });
+['pointerdown','keydown','touchstart','scroll'].forEach(ev=>{
+  window.addEventListener(ev, function once(){
+    if(!musicStopped && bgMusic.paused) playMusic().catch(()=>{});
+    window.removeEventListener(ev, once);
+  }, {passive:true});
+});
+</script>
+</body>
+</html>
