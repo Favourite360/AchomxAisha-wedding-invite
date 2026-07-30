@@ -607,7 +607,7 @@ footer .hashtag{margin-top:1rem}
 </div>
 
 <!-- ================= MUSIC ================= -->
-<audio id="bgMusic" loop preload="auto" src="audio/wedding-ambience.mp3"></audio>
+<audio id="bgMusic" loop preload="auto" src="audio/wedding-song.mp3"></audio>
 <button class="music-btn" id="musicBtn" aria-label="Play music" title="Play music" onclick="toggleMusic()">
   <svg class="note" viewBox="0 0 24 24"><path d="M12 3v10.55A4 4 0 1 0 14 17V7h4V3h-6z"/></svg>
   <span class="bars" aria-hidden="true"><span style="height:10px"></span><span style="height:16px"></span><span style="height:8px"></span></span>
@@ -778,23 +778,56 @@ document.addEventListener('keydown',e=>{
 const bgMusic = document.getElementById('bgMusic');
 const musicBtn = document.getElementById('musicBtn');
 let musicStopped = false;
+
+/* how loud the track sits under the page, and how long the fades take */
+const MUSIC_VOLUME = 0.28;
+const FADE_MS = 1800;
+let fadeTimer = null;
+
+/* ramp the volume to a target over FADE_MS, then run an optional callback */
+function fadeTo(target, done){
+  clearInterval(fadeTimer);
+  const from = bgMusic.volume;
+  const steps = 36;
+  let i = 0;
+  fadeTimer = setInterval(()=>{
+    i++;
+    const v = from + (target - from) * (i / steps);
+    bgMusic.volume = Math.min(1, Math.max(0, v));
+    if(i >= steps){
+      clearInterval(fadeTimer);
+      bgMusic.volume = Math.min(1, Math.max(0, target));
+      if(done) done();
+    }
+  }, FADE_MS / steps);
+}
+
 function playMusic(){
-  bgMusic.volume = 0.6;
+  bgMusic.volume = 0;
   return bgMusic.play().then(()=>{
+    fadeTo(MUSIC_VOLUME);
     musicBtn.classList.add('playing');
     musicBtn.setAttribute('aria-label','Pause music');
     musicBtn.title='Pause music';
   });
 }
 function pauseMusic(){
-  bgMusic.pause();
+  fadeTo(0, ()=>bgMusic.pause());
   musicBtn.classList.remove('playing');
   musicBtn.setAttribute('aria-label','Play music');
   musicBtn.title='Play music';
 }
+/* musicStopped is the source of truth, not bgMusic.paused — during a fade-out
+   the element is still "playing" for up to FADE_MS, so relying on .paused
+   would let a quick second click desync the button from the audio. */
 function toggleMusic(){
-  if(bgMusic.paused){ musicStopped=false; playMusic().catch(()=>{}); }
-  else { musicStopped=true; pauseMusic(); }
+  if(musicStopped || bgMusic.paused){
+    musicStopped = false;
+    playMusic().catch(()=>{});
+  } else {
+    musicStopped = true;
+    pauseMusic();
+  }
 }
 window.addEventListener('load', ()=>{ if(!musicStopped) playMusic().catch(()=>{}); });
 ['pointerdown','keydown','touchstart','scroll'].forEach(ev=>{
