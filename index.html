@@ -224,6 +224,12 @@ footer .hashtag{margin-top:1rem}
 .modal textarea{width:100%;padding:.85rem 1rem;border:1px solid var(--sky-200);border-radius:4px;font-family:var(--sans);font-size:1rem;color:var(--ink);background:var(--sky-50);min-height:90px;resize:vertical}
 .modal textarea:focus{outline:none;border-color:var(--sky-600)}
 .gift-msg{margin-top:1.1rem;font-family:var(--serif);font-style:italic;color:var(--sky-700);display:none}
+.gift-toward{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-deep);margin:-.8rem 0 1.2rem;display:none}
+.gift-toward.show{display:block}
+
+/* honeypot — hidden from people, irresistible to bots */
+.hp-field{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.form-error{margin-top:1rem;font-family:var(--serif);font-style:italic;color:#B3261E;display:none}
 
 /* ---------- blinking wedding hashtag ---------- */
 .blink{animation:blink 1.6s ease-in-out infinite}
@@ -401,7 +407,7 @@ footer .hashtag{margin-top:1rem}
           <h3>Monetary Gifts</h3>
           <p>Every kind contribution towards our new home and the life we are building together.</p>
           <p class="reg-price">Any amount</p>
-          <a class="btn btn-line" href="#" onclick="openGift();return false;">Contribute</a>
+          <a class="btn btn-line" href="#" onclick="openGift('Monetary Gifts');return false;">Contribute</a>
         </div>
       </div>
 
@@ -411,7 +417,7 @@ footer .hashtag{margin-top:1rem}
           <h3>Gas Cooker</h3>
           <p>Every shared meal in our new home starts right here.</p>
           <p class="reg-price">₦185,000</p>
-          <a class="btn btn-line" href="#" onclick="openGift();return false;">Contribute</a>
+          <a class="btn btn-line" href="#" onclick="openGift('Gas Cooker');return false;">Contribute</a>
         </div>
       </div>
 
@@ -421,7 +427,7 @@ footer .hashtag{margin-top:1rem}
           <h3>Hisense 10.5 Automatic Washer</h3>
           <p>Takes laundry day off our hands as we settle in.</p>
           <p class="reg-price">₦700,000</p>
-          <a class="btn btn-line" href="#" onclick="openGift();return false;">Contribute</a>
+          <a class="btn btn-line" href="#" onclick="openGift('Hisense 10.5 Automatic Washer');return false;">Contribute</a>
         </div>
       </div>
 
@@ -431,7 +437,7 @@ footer .hashtag{margin-top:1rem}
           <h3>LG Top Freezer Refrigerator (266L)</h3>
           <p>Cold drinks, fresh food and enough room for hosting.</p>
           <p class="reg-price">₦550,000</p>
-          <a class="btn btn-line" href="#" onclick="openGift();return false;">Contribute</a>
+          <a class="btn btn-line" href="#" onclick="openGift('LG Top Freezer Refrigerator (266L)');return false;">Contribute</a>
         </div>
       </div>
 
@@ -441,7 +447,7 @@ footer .hashtag{margin-top:1rem}
           <h3>Scanfrost Microwave</h3>
           <p>Warm plates and quick meals on the busiest evenings.</p>
           <p class="reg-price">₦175,000</p>
-          <a class="btn btn-line" href="#" onclick="openGift();return false;">Contribute</a>
+          <a class="btn btn-line" href="#" onclick="openGift('Scanfrost Microwave');return false;">Contribute</a>
         </div>
       </div>
 
@@ -451,7 +457,7 @@ footer .hashtag{margin-top:1rem}
           <h3>Air Fryer</h3>
           <p>Fast, healthy meals on the busiest weeknights.</p>
           <p class="reg-price">₦107,000</p>
-          <a class="btn btn-line" href="#" onclick="openGift();return false;">Contribute</a>
+          <a class="btn btn-line" href="#" onclick="openGift('Air Fryer');return false;">Contribute</a>
         </div>
       </div>
 
@@ -461,7 +467,7 @@ footer .hashtag{margin-top:1rem}
           <h3>Rechargeable Fan</h3>
           <p>Steady comfort whenever the power takes a break.</p>
           <p class="reg-price">₦179,100</p>
-          <a class="btn btn-line" href="#" onclick="openGift();return false;">Contribute</a>
+          <a class="btn btn-line" href="#" onclick="openGift('Rechargeable Fan');return false;">Contribute</a>
         </div>
       </div>
 
@@ -471,7 +477,7 @@ footer .hashtag{margin-top:1rem}
           <h3>Vacuum Cleaner</h3>
           <p>Keeps the floors spotless without eating the whole weekend.</p>
           <p class="reg-price">₦142,000</p>
-          <a class="btn btn-line" href="#" onclick="openGift();return false;">Contribute</a>
+          <a class="btn btn-line" href="#" onclick="openGift('Vacuum Cleaner');return false;">Contribute</a>
         </div>
       </div>
 
@@ -481,7 +487,7 @@ footer .hashtag{margin-top:1rem}
           <h3>Hisense 58-inch Smart TV</h3>
           <p>Match days, movie marathons and lazy Sundays sorted.</p>
           <p class="reg-price">₦580,000</p>
-          <a class="btn btn-line" href="#" onclick="openGift();return false;">Contribute</a>
+          <a class="btn btn-line" href="#" onclick="openGift('Hisense 58-inch Smart TV');return false;">Contribute</a>
         </div>
       </div>
 
@@ -491,7 +497,7 @@ footer .hashtag{margin-top:1rem}
           <h3>Generator (3.5kVA)</h3>
           <p>Reliable backup power so home never goes dark.</p>
           <p class="reg-price">₦580,000</p>
-          <a class="btn btn-line" href="#" onclick="openGift();return false;">Contribute</a>
+          <a class="btn btn-line" href="#" onclick="openGift('Generator (3.5kVA)');return false;">Contribute</a>
         </div>
       </div>
 
@@ -501,7 +507,7 @@ footer .hashtag{margin-top:1rem}
           <h3>Air Conditioner (1.5HP Split)</h3>
           <p>Cool, restful nights through every heatwave.</p>
           <p class="reg-price">₦420,000</p>
-          <a class="btn btn-line" href="#" onclick="openGift();return false;">Contribute</a>
+          <a class="btn btn-line" href="#" onclick="openGift('Air Conditioner (1.5HP Split)');return false;">Contribute</a>
         </div>
       </div>
 
@@ -569,8 +575,13 @@ footer .hashtag{margin-top:1rem}
             </label>
           </div>
         </div>
+        <div class="hp-field" aria-hidden="true">
+          <label for="rsvpWebsite">Leave this field empty</label>
+          <input type="text" id="rsvpWebsite" name="website" tabindex="-1" autocomplete="off" />
+        </div>
         <button class="btn btn-solid" type="submit">Send RSVP</button>
         <p class="rsvp-msg" id="rsvpMsg">Thank you! Your response has been noted.</p>
+        <p class="form-error" id="rsvpErr">Sorry — that didn’t send. Please check your connection and try again.</p>
       </form>
       <!-- NOTE FOR DEV: wire this form to Formspree, Google Forms, or a
            WhatsApp deep link before launch. Currently front-end only. -->
@@ -607,6 +618,7 @@ footer .hashtag{margin-top:1rem}
     <button class="modal-close" aria-label="Close" onclick="closeGift()">&times;</button>
     <p class="kicker">With love</p>
     <h3 id="giftTitle">Send a Gift</h3>
+    <p class="gift-toward" id="giftToward"></p>
     <div class="acct-box">
       <p class="acct-label">Account Number</p>
       <p class="acct-num" id="acctNum">0068229840</p>
@@ -623,8 +635,13 @@ footer .hashtag{margin-top:1rem}
         <label for="gifterMsg">Message <span style="text-transform:none;letter-spacing:0;color:var(--ink-soft)">(optional)</span></label>
         <textarea id="gifterMsg" name="gifterMsg" placeholder="Drop a kind word for the couple..."></textarea>
       </div>
+      <div class="hp-field" aria-hidden="true">
+        <label for="giftWebsite">Leave this field empty</label>
+        <input type="text" id="giftWebsite" name="website" tabindex="-1" autocomplete="off" />
+      </div>
       <button class="btn btn-solid" type="submit" style="width:100%">Send</button>
       <p class="gift-msg" id="giftMsg">Thank you for the love! It means the world to us.</p>
+      <p class="form-error" id="giftErr">Sorry — that didn’t send. Please check your connection and try again.</p>
     </form>
     <!-- NOTE FOR DEV: wire this form to Formspree / Google Sheets / WhatsApp
          before launch so the couple actually receives the gifter's name and message.
@@ -684,8 +701,68 @@ document.querySelectorAll('.nav-links a').forEach(a=>{
   updateActive();
 })();
 
+/* ============================================================
+   FORM DELIVERY — Google Apps Script -> Google Sheet
+   Paste the /exec URL from the Apps Script deployment below.
+   While it is left as PASTE_..., both forms behave exactly as
+   they did before (thank-you message, nothing sent), so the site
+   is never broken by an unfinished setup.
+   ============================================================ */
+const ENDPOINT = 'PASTE_YOUR_APPS_SCRIPT_EXEC_URL_HERE';
+const ENDPOINT_READY = ENDPOINT.indexOf('http') === 0;
+
+/* Apps Script does not answer CORS preflight, so we send a simple
+   text/plain request in no-cors mode. The trade-off is that the
+   response is opaque: we can tell the request left the browser,
+   but not what the server did with it. Good enough here, and it
+   avoids every guest hitting a CORS wall. */
+function sendToSheet(payload){
+  if(!ENDPOINT_READY) return Promise.resolve();
+  return fetch(ENDPOINT, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: {'Content-Type': 'text/plain;charset=utf-8'},
+    body: JSON.stringify(payload)
+  });
+}
+
+/* Shared submit flow: disable the button, send, then show either
+   the thank-you or the error and re-enable so they can retry. */
+function submitForm(e, payload, msgId, errId){
+  e.preventDefault();
+  const btn = e.target.querySelector('button[type=submit]');
+  const msg = document.getElementById(msgId);
+  const err = document.getElementById(errId);
+  err.style.display = 'none';
+  btn.disabled = true;
+  const original = btn.textContent;
+  btn.textContent = 'Sending…';
+
+  sendToSheet(payload)
+    .then(()=>{
+      msg.style.display = 'block';
+      btn.textContent = original;
+    })
+    .catch(()=>{
+      err.style.display = 'block';
+      btn.disabled = false;
+      btn.textContent = original;
+    });
+
+  return false;
+}
+
 /* gift modal */
-function openGift(){
+let currentGiftItem = '';
+function openGift(item){
+  currentGiftItem = item || 'Unspecified';
+  const toward = document.getElementById('giftToward');
+  if(item){
+    toward.textContent = 'Towards: ' + item;
+    toward.classList.add('show');
+  } else {
+    toward.classList.remove('show');
+  }
   document.getElementById('giftModal').classList.add('open');
   document.body.style.overflow='hidden';
 }
@@ -701,18 +778,23 @@ function copyAcct(btn){
   else{ const t=document.createElement('textarea'); t.value=num; document.body.appendChild(t); t.select(); document.execCommand('copy'); t.remove(); done(); }
 }
 function handleGift(e){
-  e.preventDefault();
-  document.getElementById('giftMsg').style.display='block';
-  e.target.querySelector('button[type=submit]').disabled=true;
-  return false;
+  return submitForm(e, {
+    form:    'gift',
+    item:    currentGiftItem,
+    name:    document.getElementById('gifterName').value,
+    message: document.getElementById('gifterMsg').value,
+    website: document.getElementById('giftWebsite').value
+  }, 'giftMsg', 'giftErr');
 }
 
-/* rsvp — front-end only until a backend/form service is wired in */
 function handleRsvp(e){
-  e.preventDefault();
-  document.getElementById('rsvpMsg').style.display='block';
-  e.target.querySelector('button[type=submit]').disabled=true;
-  return false;
+  const choice = e.target.querySelector('input[name=attend]:checked');
+  return submitForm(e, {
+    form:      'rsvp',
+    name:      document.getElementById('fullname').value,
+    attending: choice ? (choice.value === 'accept' ? 'Yes' : 'No') : '',
+    website:   document.getElementById('rsvpWebsite').value
+  }, 'rsvpMsg', 'rsvpErr');
 }
 
 /* countdown to the wedding (Nov 14 2026, 10:00 WAT / UTC+1) */
