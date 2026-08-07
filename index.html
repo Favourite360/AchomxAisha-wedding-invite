@@ -754,7 +754,18 @@ function sendToEmail(payload){
     body: JSON.stringify(body)
   }).then(r=>{
     if(!r.ok) throw new Error('email endpoint returned ' + r.status);
-    return r;
+    return r.json().catch(()=>({}));
+  }).then(result=>{
+    /* FormSubmit answers HTTP 200 even when it did NOT send: until
+       the address is confirmed it replies {"success":"false"} with
+       an activation notice. Checking only the status code would let
+       that pass as delivered, so read the body and treat it as the
+       failure it is. */
+    if(String(result.success) !== 'true'){
+      console.warn('FormSubmit did not deliver:', result.message || result);
+      throw new Error(result.message || 'FormSubmit rejected the submission');
+    }
+    return result;
   });
 }
 
