@@ -9,9 +9,12 @@
    1. Go to sheets.new to create a spreadsheet. Name it something
       like "Nnamdi & Aisha — Wedding Responses".
 
-   2. Copy its ID from the address bar. The URL looks like:
-        https://docs.google.com/spreadsheets/d/THIS_LONG_BIT/edit
-      Paste that long bit into SHEET_ID below.
+   2. Copy its ID from the address bar. In a URL like
+        https://docs.google.com/spreadsheets/d/1AbC...XyZ/edit?gid=0
+      the ID is ONLY the part between /d/ and the next slash —
+      not the whole address. Paste it into SHEET_ID below.
+      (Pasting the full URL also works; the script pulls the ID
+      out for you.)
 
    3. In that spreadsheet: Extensions -> Apps Script.
       Delete whatever is in the editor, paste this whole file in,
@@ -39,7 +42,14 @@
    to make them yourself.
    ============================================================ */
 
-const SHEET_ID = 'https://docs.google.com/spreadsheets/d/14qG_Ni9zK2nXxF-EzJKYPxTULax5B2YP703NKJTLYI4/edit?pli=1&gid=0#gid=0';
+const SHEET_ID = '14qG_Ni9zK2nXxF-EzJKYPxTULax5B2YP703NKJTLYI4';
+
+/* Accepts either a bare ID or a full spreadsheet URL, so pasting
+   the whole address from the tab bar still works. */
+function resolveSheetId(value) {
+  const found = String(value).match(/\/d\/([a-zA-Z0-9-_]+)/);
+  return found ? found[1] : String(value).trim();
+}
 
 /* Which tab each form goes to, and the columns it writes. */
 const TABS = {
@@ -96,7 +106,7 @@ function doGet() {
 
 /* Finds the tab, creating it (with headers) the first time. */
 function getTab(config) {
-  const book = SpreadsheetApp.openById(SHEET_ID);
+  const book = SpreadsheetApp.openById(resolveSheetId(SHEET_ID));
   let sheet = book.getSheetByName(config.name);
 
   if (!sheet) {
