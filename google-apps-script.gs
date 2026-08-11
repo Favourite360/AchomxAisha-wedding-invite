@@ -33,9 +33,17 @@
    5. Copy the Web app URL it gives you. It ends in /exec.
       That URL goes into index.html as ENDPOINT.
 
-   NOTE: every time you edit this script you must Deploy -> Manage
-   deployments -> edit -> Version: New version, or the live site
-   keeps running the old code.
+   NOTE — THE ONE THAT CATCHES EVERYONE:
+   Editing and saving this file does NOT change what the live URL
+   runs. A deployment is pinned to a numbered version. After any
+   edit you MUST do:
+       Deploy -> Manage deployments -> pencil icon
+              -> Version: New version -> Deploy
+   Saving alone leaves the old code serving, which looks exactly
+   like the script being broken.
+
+   To check which code is live, open the /exec URL in a browser.
+   It reports its own version plus whether it can reach the sheet.
 
    The two tabs ("RSVP" and "Gifts") are created automatically on
    the first submission, with bold frozen headers. You do not need
@@ -98,10 +106,47 @@ function doPost(e) {
   }
 }
 
-/* Lets you confirm the deployment is alive by opening the /exec
-   URL in a browser. Should show {"result":"ok",...}. */
+/* Bump this whenever you edit the file. Opening the /exec URL shows
+   it back, which is how you tell whether the deployment is serving
+   your latest code or an older pinned version. */
+const SCRIPT_VERSION = 'v3';
+
+/* Self-test. Open the /exec URL in a browser and it reports whether
+   the running code is current AND whether it can actually reach the
+   spreadsheet — the two things that fail silently on POST, because
+   a no-cors request cannot read the response. */
 function doGet() {
-  return reply('ok', 'endpoint is live — post to this URL');
+  const report = {
+    version: SCRIPT_VERSION,
+    resolvedId: resolveSheetId(SHEET_ID),
+    sheetOpened: false,
+    tabs: [],
+    canWrite: false,
+    error: null
+  };
+
+  try {
+    const book = SpreadsheetApp.openById(resolveSheetId(SHEET_ID));
+    report.sheetOpened = true;
+    report.spreadsheetName = book.getName();
+    report.tabs = book.getSheets().map(function (s) {
+      return s.getName() + ' (' + s.getLastRow() + ' rows)';
+    });
+
+    /* Prove write access for real, then immediately undo it. */
+    const probe = getTab(TABS.rsvp);
+    probe.appendRow(['SELF-TEST', 'delete me', '']);
+    SpreadsheetApp.flush();
+    probe.deleteRow(probe.getLastRow());
+    report.canWrite = true;
+
+  } catch (err) {
+    report.error = String(err);
+  }
+
+  return ContentService
+    .createTextOutput(JSON.stringify(report, null, 1))
+    .setMimeType(ContentService.MimeType.JSON);
 }
 
 /* Finds the tab, creating it (with headers) the first time. */
