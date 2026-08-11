@@ -149,6 +149,63 @@ function doGet() {
     .setMimeType(ContentService.MimeType.JSON);
 }
 
+/* ------------------------------------------------------------
+   ONE-OFF CLEANUP — removes the test rows left behind while the
+   forms were being wired up.
+
+   HOW TO RUN (takes 10 seconds, no deployment needed):
+     1. In the Apps Script editor, pick "cleanupTestRows" from the
+        function dropdown in the toolbar.
+     2. Click Run.
+     3. Read the result in the Execution log at the bottom.
+
+   Running a function in the editor uses the code as saved, so this
+   does NOT disturb the live deployment. Your forms keep working
+   throughout.
+
+   It only deletes rows whose Name cell begins with one of the
+   markers below. A real guest's row can never match, so this is
+   safe to run more than once.
+   ------------------------------------------------------------ */
+const TEST_MARKERS = ['ZZ TEST', 'ZZ FINAL TEST', 'SELF-TEST', 'ZZ CORS PROBE'];
+
+function cleanupTestRows() {
+  const book = SpreadsheetApp.openById(resolveSheetId(SHEET_ID));
+  const summary = [];
+
+  ['RSVP', 'Gifts'].forEach(function (tabName) {
+    const sheet = book.getSheetByName(tabName);
+    if (!sheet) { summary.push(tabName + ': tab not found'); return; }
+
+    const lastRow = sheet.getLastRow();
+    if (lastRow < 2) { summary.push(tabName + ': nothing to do'); return; }
+
+    /* Name sits in column B on RSVP, column C on Gifts. */
+    const nameCol = (tabName === 'RSVP') ? 2 : 3;
+    const names = sheet.getRange(2, nameCol, lastRow - 1, 1).getValues();
+
+    /* Walk bottom-up so deleting a row cannot shift the ones we
+       have not checked yet. */
+    let removed = 0;
+    for (let i = names.length - 1; i >= 0; i--) {
+      const value = String(names[i][0] || '').trim();
+      const isTest = TEST_MARKERS.some(function (marker) {
+        return value.indexOf(marker) === 0;
+      });
+      if (isTest) {
+        sheet.deleteRow(i + 2);
+        removed++;
+      }
+    }
+    summary.push(tabName + ': removed ' + removed +
+                 ', ' + (sheet.getLastRow() - 1) + ' real rows left');
+  });
+
+  const message = summary.join('  |  ');
+  Logger.log(message);
+  return message;
+}
+
 /* Finds the tab, creating it (with headers) the first time. */
 function getTab(config) {
   const book = SpreadsheetApp.openById(resolveSheetId(SHEET_ID));
