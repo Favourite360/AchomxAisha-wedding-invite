@@ -190,8 +190,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,
 .rsvp-deadline{font-family:var(--serif);font-style:italic;margin-bottom:2rem}
 .field{margin-bottom:1.6rem;text-align:left}
 .field label{display:block;font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ink);margin-bottom:.5rem;font-weight:500}
-.field input[type=text]{width:100%;padding:.85rem 1rem;border:1px solid var(--sky-200);border-radius:4px;font-family:var(--sans);font-size:1rem;color:var(--ink);background:var(--sky-50)}
-.field input[type=text]:focus{outline:none;border-color:var(--sky-600)}
+.field input[type=text],
+.field input[type=tel]{width:100%;padding:.85rem 1rem;border:1px solid var(--sky-200);border-radius:4px;font-family:var(--sans);font-size:1rem;color:var(--ink);background:var(--sky-50)}
+.field input[type=text]:focus,
+.field input[type=tel]:focus{outline:none;border-color:var(--sky-600)}
+.req{color:#CC5500;margin-left:.15rem}
 .radio-row{display:flex;gap:1rem;flex-wrap:wrap}
 .radio-pill{flex:1;min-width:180px}
 .radio-pill input{display:none}
@@ -575,19 +578,19 @@ footer .hashtag{margin-top:1rem}
       <p class="rsvp-deadline">Kindly respond by [RSVP DEADLINE]</p>
       <form id="rsvpForm" onsubmit="return handleRsvp(event)">
         <div class="field">
-          <label for="phone">WhatsApp Number</label>
+          <label for="phone">WhatsApp Number<span class="req" aria-hidden="true">*</span></label>
           <input type="tel" id="phone" name="phone" inputmode="tel"
                  autocomplete="tel" placeholder="e.g. 0803 123 4567"
                  oninput="onPhoneInput()" required />
           <p class="field-hint" id="phoneHint">Enter the number your invitation was sent to.</p>
         </div>
         <div class="field">
-          <label for="fullname">Full Name</label>
+          <label for="fullname">Full Name<span class="req" aria-hidden="true">*</span></label>
           <input type="text" id="fullname" name="fullname"
                  placeholder="Your name as you would like it on your card" required />
         </div>
         <div class="field" id="attendField">
-          <label>Will you attend?</label>
+          <label>Will you attend?<span class="req" aria-hidden="true">*</span></label>
           <div class="radio-row">
             <label class="radio-pill">
               <input type="radio" name="attend" value="accept" required disabled />
@@ -739,7 +742,7 @@ document.querySelectorAll('.nav-links a').forEach(a=>{
 /* Two independent destinations, so one failing does not lose a
    response: the Google Sheet is the record the couple works from,
    FormSubmit emails a copy as the backup. */
-const ENDPOINT = 'https://script.google.com/macros/s/AKfycbzR87TA8yqFU08nn7I9L6wkxm9BUzrgAIM2s9uWg9ECpqsqmXT2EAuZRc_z_XUWhAQAqQ/exec';
+const ENDPOINT = 'https://script.google.com/macros/s/AKfycbwc4jGmmqYOhiuuDqlsw1oOfAmPgUjMgJQFNeBJlgyi7a7c8_cneFGE1jnopFeoTP1hKQ/exec';
 /* FormSubmit alias, not the raw address — the endpoint is visible
    in page source, and a plain mailto in public HTML gets scraped. */
 const EMAIL_ENDPOINT = 'https://formsubmit.co/ajax/78f71733a93515a0c8dfaa8fe7c1d6e0';

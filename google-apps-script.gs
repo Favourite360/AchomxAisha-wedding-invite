@@ -19,16 +19,24 @@
         - click Run
       That creates all three tabs with the right headers.
 
-   3. Fill in the Guests tab. One row per invited guest:
+   3. Fill in the Guests tab. It is just a list of numbers:
 
-        Name             Phone         Code     Admits
-        Emmanuel         09138714023   NA-001   1
+        Phone
+        09138714023
+        08031234567
 
-      Phone can be written any way — 0803 123 4567,
-      +2348031234567, 234-803-123-4567 all work.
-      Admits blank means 1. Set 2 or 3 for guests who may
-      bring someone.
-      Code is what prints large on their access card.
+      Any format works — 0803 123 4567, +2348031234567,
+      234-803-123-4567 all match the same person.
+
+      Codes (NA-001, NA-002, ...) are issued automatically on the
+      RSVP tab the first time a guest accepts, and stay the same
+      for that guest forever.
+
+      PLUS-ONES: add a second column headed exactly "Admits" and
+      put 2 or 3 against whoever may bring someone. Blank or no
+      column at all means 1. Columns are matched by their header
+      text, so you can add it whenever the client decides —
+      no code change, no redeploy.
 
    4. Deploy -> New deployment -> Web app
         Execute as:     Me
@@ -47,7 +55,7 @@
 
 const SHEET_ID = '14qG_Ni9zK2nXxF-EzJKYPxTULax5B2YP703NKJTLYI4';
 
-const SCRIPT_VERSION = 'v5 — guest verification';
+const SCRIPT_VERSION = 'v7 — phone-only guest list';
 
 /* Accepts a bare ID or a full spreadsheet URL. */
 function resolveSheetId(value) {
@@ -55,10 +63,35 @@ function resolveSheetId(value) {
   return found ? found[1] : String(value).trim();
 }
 
+/* You only need to fill in Phone. Code is written back by the
+   script the first time that guest RSVPs, and Name/Admits are
+   optional — Name is whatever the guest types, Admits blank
+   means 1. */
+/* The invitation list is nothing but phone numbers.
+
+   Columns are found by their HEADER TEXT rather than by position,
+   so you can add an "Admits" column later — for guests allowed a
+   plus-one — without touching this script. Anything not present
+   simply falls back to a default. */
 const GUESTS_TAB = {
   name: 'Guests',
-  headers: ['Name', 'Phone', 'Code', 'Admits']
+  headers: ['Phone']
 };
+
+function headerIndex(sheet, wanted) {
+  const width = Math.max(1, sheet.getLastColumn());
+  const row = sheet.getRange(1, 1, 1, width).getValues()[0];
+  for (let i = 0; i < row.length; i++) {
+    if (String(row[i]).trim().toLowerCase() === wanted) return i;
+  }
+  return -1;
+}
+
+/* Access codes are issued on first RSVP, in order, and written
+   back to the Guests tab so they never change and the couple can
+   print a door list straight from the sheet. */
+const CODE_PREFIX = 'NA-';
+const CODE_PAD = 3;
 
 const TABS = {
   rsvp: {
@@ -75,11 +108,20 @@ const TABS = {
    Run this once from the editor to build all three tabs.
    ------------------------------------------------------------ */
 function setupTabs() {
-  const made = [GUESTS_TAB, TABS.rsvp, TABS.gift].map(function (cfg) {
+  const book = SpreadsheetApp.openById(resolveSheetId(SHEET_ID));
+
+  /* Left-to-right: Guests, Gifts, RSVP. */
+  const order = [GUESTS_TAB, TABS.gift, TABS.rsvp];
+  const made = order.map(function (cfg, i) {
     const sheet = getTab(cfg);
-    return cfg.name + ' (' + (sheet.getLastRow() - 1) + ' rows)';
+    book.setActiveSheet(sheet);
+    book.moveActiveSheet(i + 1);
+    return cfg.name + ' (' + Math.max(0, sheet.getLastRow() - 1) + ' rows)';
   });
-  const msg = 'Ready: ' + made.join(', ') + '. Now fill in the Guests tab.';
+
+  const msg = 'Ready: ' + made.join(', ') +
+              '. Put the guests\' phone numbers in the Guests tab — ' +
+              'codes fill themselves in as people RSVP.';
   Logger.log(msg);
   return msg;
 }
@@ -104,19 +146,59 @@ function findGuest(phone) {
   const lastRow = sheet.getLastRow();
   if (lastRow < 2) return null;
 
-  const rows = sheet.getRange(2, 1, lastRow - 1, 4).getValues();
+  const width = Math.max(1, sheet.getLastColumn());
+  const phoneCol  = Math.max(0, headerIndex(sheet, 'phone'));
+  const admitsCol = headerIndex(sheet, 'admits');
+
+  const rows = sheet.getRange(2, 1, lastRow - 1, width).getValues();
   for (let i = 0; i < rows.length; i++) {
-    if (normalisePhone(rows[i][1]) === key) {
-      const admits = parseInt(rows[i][3], 10);
+    if (normalisePhone(rows[i][phoneCol]) === key) {
+      const admits = (admitsCol >= 0) ? parseInt(rows[i][admitsCol], 10) : NaN;
       return {
-        name:   String(rows[i][0] || '').trim(),
-        phone:  String(rows[i][1] || '').trim(),
-        code:   String(rows[i][2] || '').trim(),
-        admits: (admits > 0) ? admits : 1
+        phone:  String(rows[i][phoneCol] || '').trim(),
+        admits: (admits > 0) ? admits : 1,
+        row:    i + 2
       };
     }
   }
   return null;
+}
+
+/* The Guests tab holds only phone numbers, so a guest's code is
+   kept on their RSVP row instead. There is exactly one RSVP row
+   per phone number, so the code found there is the one already
+   issued — which is what makes a re-download return the same
+   card rather than a fresh number. */
+function existingCode(phone) {
+  const sheet = getTab(TABS.rsvp);
+  const lastRow = sheet.getLastRow();
+  if (lastRow < 2) return '';
+  const key = normalisePhone(phone);
+  const rows = sheet.getRange(2, 3, lastRow - 1, 3).getValues();  /* Phone, Attending, Code */
+  for (let i = 0; i < rows.length; i++) {
+    if (normalisePhone(rows[i][0]) === key) return String(rows[i][2] || '').trim();
+  }
+  return '';
+}
+
+function ensureCode(guest) {
+  const already = existingCode(guest.phone);
+  if (already) { guest.code = already; return already; }
+
+  const sheet = getTab(TABS.rsvp);
+  const lastRow = sheet.getLastRow();
+  let highest = 0;
+  if (lastRow >= 2) {
+    const codes = sheet.getRange(2, 5, lastRow - 1, 1).getValues();
+    for (let i = 0; i < codes.length; i++) {
+      const m = String(codes[i][0] || '').match(/(\d+)\s*$/);
+      if (m) highest = Math.max(highest, parseInt(m[1], 10));
+    }
+  }
+  let n = String(highest + 1);
+  while (n.length < CODE_PAD) n = '0' + n;
+  guest.code = CODE_PREFIX + n;
+  return guest.code;
 }
 
 /* One row per guest, keyed on phone. Someone replying again — to
@@ -181,6 +263,11 @@ function doPost(e) {
          the record and the card. Code and admits always come from
          the sheet, never from the browser. */
       const givenName = clean(data.name) || guest.name;
+
+      /* Only guests who are actually coming need a pass, so a
+         decline never burns a code. */
+      if (attending === 'Yes') ensureCode(guest);
+
       const outcome = upsertRsvp(guest, givenName, attending);
 
       return json({
