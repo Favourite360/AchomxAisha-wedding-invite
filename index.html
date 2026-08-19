@@ -227,6 +227,20 @@ footer .hashtag{margin-top:1rem}
 .gift-toward{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-deep);margin:-.8rem 0 1.2rem;display:none}
 .gift-toward.show{display:block}
 
+/* ---------- rsvp verification states ---------- */
+.field-hint{font-size:.8rem;letter-spacing:.02em;color:var(--ink-soft);margin-top:.45rem;font-style:italic;text-transform:none}
+.field-hint.checking{color:var(--sky-600)}
+.field-hint.good{color:#1E7A46}
+.field-hint.bad{color:#B3261E}
+.field input[readonly]{background:var(--sky-100);color:var(--ink-soft);cursor:not-allowed}
+.field input[readonly].filled{background:var(--white);color:var(--ink);font-weight:500}
+.radio-pill input:disabled + span{opacity:.45;cursor:not-allowed;background:var(--sky-100)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn:disabled:hover{background:var(--sky-600);border-color:var(--sky-600)}
+.card-ready{display:none;margin-top:1.6rem;padding-top:1.4rem;border-top:1px solid var(--sky-200)}
+.card-ready.show{display:block}
+.card-ready-note{font-family:var(--serif);font-style:italic;color:var(--ink);margin-bottom:.9rem}
+
 /* honeypot — hidden from people, irresistible to bots */
 .hp-field{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
 .form-error{margin-top:1rem;font-family:var(--serif);font-style:italic;color:#B3261E;display:none}
@@ -357,34 +371,36 @@ footer .hashtag{margin-top:1rem}
       <div class="card reveal">
         <p class="kicker">Engagement</p>
         <p class="card-date">November 14th, 2026</p>
-        <p class="card-time">11:00 AM</p>
-        <h3>Union Bank Hall</h3>
-        <p>Sickle Cell Foundation Nigeria, Idi-Araba, Opp. LUTH, Surulere, Lagos</p>
-        <div class="swatch">
-          <span class="swatch-dot" style="background:#F7F1E4" title="Ivory"></span>
-          <span class="swatch-dot" style="background:#CC5500" title="Burnt Orange"></span>
-        </div>
-        <p class="card-note">Colours of the Day: Ivory &amp; Burnt Orange</p>
-        <div class="card-actions">
-          <a class="btn btn-solid" href="https://maps.app.goo.gl/bqJSsfzdNKzLtRHk7" target="_blank" rel="noopener">View on map</a>
-          <a class="btn btn-line" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Nnamdi%20%26%20Aisha%20Wedding%20%E2%80%94%20Engagement&amp;dates=20261114T110000/20261114T130000&amp;ctz=Africa/Lagos&amp;location=Union%20Bank%20Hall%2C%20Sickle%20Cell%20Foundation%20Nigeria%2C%20Idi-Araba%2C%20Opp.%20LUTH%2C%20Surulere%2C%20Lagos&amp;details=We%20can%27t%20wait%20to%20celebrate%20with%20you%21%20%23foreverNAszn2026" target="_blank" rel="noopener">Add to calendar</a>
-        </div>
-      </div>
-
-      <div class="card reveal">
-        <p class="kicker">Reception</p>
-        <p class="card-date">November 14th, 2026</p>
         <p class="card-time">1:00 PM</p>
         <h3>Union Bank Hall</h3>
         <p>Sickle Cell Foundation Nigeria, Idi-Araba, Opp. LUTH, Surulere, Lagos</p>
         <div class="swatch">
           <span class="swatch-dot" style="background:#F7F1E4" title="Ivory"></span>
           <span class="swatch-dot" style="background:#CC5500" title="Burnt Orange"></span>
+          <span class="swatch-dot" style="background:#C9A227" title="Champagne Gold"></span>
         </div>
-        <p class="card-note">Colours of the Day: Ivory &amp; Burnt Orange</p>
+        <p class="card-note">Colours of the Day: Ivory, Burnt Orange &amp; Champagne Gold</p>
         <div class="card-actions">
           <a class="btn btn-solid" href="https://maps.app.goo.gl/bqJSsfzdNKzLtRHk7" target="_blank" rel="noopener">View on map</a>
-          <a class="btn btn-line" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Nnamdi%20%26%20Aisha%20Wedding%20%E2%80%94%20Reception&amp;dates=20261114T130000/20261114T170000&amp;ctz=Africa/Lagos&amp;location=Union%20Bank%20Hall%2C%20Sickle%20Cell%20Foundation%20Nigeria%2C%20Idi-Araba%2C%20Opp.%20LUTH%2C%20Surulere%2C%20Lagos&amp;details=We%20can%27t%20wait%20to%20celebrate%20with%20you%21%20%23foreverNAszn2026" target="_blank" rel="noopener">Add to calendar</a>
+          <a class="btn btn-line" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Nnamdi%20%26%20Aisha%20Wedding%20%E2%80%94%20Engagement&amp;dates=20261114T130000/20261114T140000&amp;ctz=Africa/Lagos&amp;location=Union%20Bank%20Hall%2C%20Sickle%20Cell%20Foundation%20Nigeria%2C%20Idi-Araba%2C%20Opp.%20LUTH%2C%20Surulere%2C%20Lagos&amp;details=We%20can%27t%20wait%20to%20celebrate%20with%20you%21%20%23foreverNAszn2026" target="_blank" rel="noopener">Add to calendar</a>
+        </div>
+      </div>
+
+      <div class="card reveal">
+        <p class="kicker">Reception</p>
+        <p class="card-date">November 14th, 2026</p>
+        <p class="card-time">Immediately after engagement</p>
+        <h3>Union Bank Hall</h3>
+        <p>Sickle Cell Foundation Nigeria, Idi-Araba, Opp. LUTH, Surulere, Lagos</p>
+        <div class="swatch">
+          <span class="swatch-dot" style="background:#F7F1E4" title="Ivory"></span>
+          <span class="swatch-dot" style="background:#CC5500" title="Burnt Orange"></span>
+          <span class="swatch-dot" style="background:#C9A227" title="Champagne Gold"></span>
+        </div>
+        <p class="card-note">Colours of the Day: Ivory, Burnt Orange &amp; Champagne Gold</p>
+        <div class="card-actions">
+          <a class="btn btn-solid" href="https://maps.app.goo.gl/bqJSsfzdNKzLtRHk7" target="_blank" rel="noopener">View on map</a>
+          <a class="btn btn-line" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Nnamdi%20%26%20Aisha%20Wedding%20%E2%80%94%20Reception&amp;dates=20261114T140000/20261114T180000&amp;ctz=Africa/Lagos&amp;location=Union%20Bank%20Hall%2C%20Sickle%20Cell%20Foundation%20Nigeria%2C%20Idi-Araba%2C%20Opp.%20LUTH%2C%20Surulere%2C%20Lagos&amp;details=We%20can%27t%20wait%20to%20celebrate%20with%20you%21%20%23foreverNAszn2026" target="_blank" rel="noopener">Add to calendar</a>
         </div>
       </div>
 
@@ -559,18 +575,26 @@ footer .hashtag{margin-top:1rem}
       <p class="rsvp-deadline">Kindly respond by [RSVP DEADLINE]</p>
       <form id="rsvpForm" onsubmit="return handleRsvp(event)">
         <div class="field">
-          <label for="fullname">Full Name</label>
-          <input type="text" id="fullname" name="fullname" required />
+          <label for="phone">WhatsApp Number</label>
+          <input type="tel" id="phone" name="phone" inputmode="tel"
+                 autocomplete="tel" placeholder="e.g. 0803 123 4567"
+                 oninput="onPhoneInput()" required />
+          <p class="field-hint" id="phoneHint">Enter the number your invitation was sent to.</p>
         </div>
         <div class="field">
+          <label for="fullname">Full Name</label>
+          <input type="text" id="fullname" name="fullname"
+                 placeholder="Your name as you would like it on your card" required />
+        </div>
+        <div class="field" id="attendField">
           <label>Will you attend?</label>
           <div class="radio-row">
             <label class="radio-pill">
-              <input type="radio" name="attend" value="accept" required />
+              <input type="radio" name="attend" value="accept" required disabled />
               <span>Joyfully Accept</span>
             </label>
             <label class="radio-pill">
-              <input type="radio" name="attend" value="decline" />
+              <input type="radio" name="attend" value="decline" disabled />
               <span>Regretfully Decline</span>
             </label>
           </div>
@@ -579,9 +603,13 @@ footer .hashtag{margin-top:1rem}
           <label for="rsvpWebsite">Leave this field empty</label>
           <input type="text" id="rsvpWebsite" name="website" tabindex="-1" autocomplete="off" />
         </div>
-        <button class="btn btn-solid" type="submit">Send RSVP</button>
+        <button class="btn btn-solid" type="submit" id="rsvpSubmit" disabled>Send RSVP</button>
         <p class="rsvp-msg" id="rsvpMsg">Thank you! Your response has been noted.</p>
         <p class="form-error" id="rsvpErr">Sorry — that didn’t send. Please check your connection and try again.</p>
+        <div class="card-ready" id="cardReady">
+          <p class="card-ready-note">Your access card is ready. Please bring it with you.</p>
+          <button type="button" class="btn btn-line" id="cardBtn" onclick="downloadCard()">Download access card</button>
+        </div>
       </form>
       <!-- NOTE FOR DEV: wire this form to Formspree, Google Forms, or a
            WhatsApp deep link before launch. Currently front-end only. -->
@@ -711,7 +739,7 @@ document.querySelectorAll('.nav-links a').forEach(a=>{
 /* Two independent destinations, so one failing does not lose a
    response: the Google Sheet is the record the couple works from,
    FormSubmit emails a copy as the backup. */
-const ENDPOINT = 'https://script.google.com/macros/s/AKfycbwBTz0X6I7Zq1fiYzFzszCXV9TJmYXddJ5Ps_uWP-8JC9_-yv9T506KHJE4i5oiLKah-Q/exec';
+const ENDPOINT = 'https://script.google.com/macros/s/AKfycbzR87TA8yqFU08nn7I9L6wkxm9BUzrgAIM2s9uWg9ECpqsqmXT2EAuZRc_z_XUWhAQAqQ/exec';
 /* FormSubmit alias, not the raw address — the endpoint is visible
    in page source, and a plain mailto in public HTML gets scraped. */
 const EMAIL_ENDPOINT = 'https://formsubmit.co/ajax/78f71733a93515a0c8dfaa8fe7c1d6e0';
@@ -846,14 +874,137 @@ function handleGift(e){
   }, 'giftMsg', 'giftErr');
 }
 
+/* ============================================================
+   GUEST VERIFICATION
+   Only people on the couple's list may RSVP. The list itself never
+   leaves the spreadsheet — the page asks about one number at a
+   time and is told only about that guest.
+   ============================================================ */
+let verifiedGuest = null;
+let verifyTimer = null;
+
+/* Same rule the script uses: compare the last 10 digits, so
+   0803…, +234803… and 234-803-… are all the same person. */
+function localDigits(value){
+  const d = String(value || '').replace(/\D/g, '');
+  return d.length > 10 ? d.slice(-10) : d;
+}
+
+function setRsvpEnabled(on){
+  document.querySelectorAll('input[name=attend]').forEach(r=>{ r.disabled = !on; });
+  document.getElementById('rsvpSubmit').disabled = !on;
+}
+
+function hint(text, cls){
+  const el = document.getElementById('phoneHint');
+  el.textContent = text;
+  el.className = 'field-hint' + (cls ? ' ' + cls : '');
+}
+
+/* Typing invalidates any previous check, so a guest cannot verify
+   one number and then submit a different one. */
+function onPhoneInput(){
+  clearTimeout(verifyTimer);
+  if(verifiedGuest){
+    verifiedGuest = null;
+    setRsvpEnabled(false);
+    document.getElementById('cardReady').classList.remove('show');
+    document.getElementById('rsvpMsg').style.display = 'none';
+  }
+  const digits = localDigits(document.getElementById('phone').value);
+  if(digits.length < 10){
+    hint('Enter the number your invitation was sent to.');
+    return;
+  }
+  hint('Checking your number…', 'checking');
+  verifyTimer = setTimeout(verifyPhone, 500);
+}
+
+function verifyPhone(){
+  const phone = document.getElementById('phone').value;
+  if(localDigits(phone).length < 10) return;
+
+  fetch(ENDPOINT, {
+    method: 'POST',
+    headers: {'Content-Type': 'text/plain;charset=utf-8'},
+    body: JSON.stringify({action: 'verify', phone: phone})
+  })
+  .then(r=>r.json())
+  .then(res=>{
+    if(res.found){
+      verifiedGuest = res;
+      hint('Number confirmed — please complete the form below.', 'good');
+      setRsvpEnabled(true);
+    } else {
+      verifiedGuest = null;
+      setRsvpEnabled(false);
+      hint('We could not find that number on the guest list. Please check it, or contact us using the numbers above.', 'bad');
+    }
+  })
+  .catch(()=>{
+    verifiedGuest = null;
+    setRsvpEnabled(false);
+    hint('Could not check your number just now. Please check your connection and try again.', 'bad');
+  });
+}
+
 function handleRsvp(e){
+  e.preventDefault();
+  if(!verifiedGuest){ return false; }
+
   const choice = e.target.querySelector('input[name=attend]:checked');
-  return submitForm(e, {
+  const attending = choice ? (choice.value === 'accept' ? 'Yes' : 'No') : '';
+  const btn = document.getElementById('rsvpSubmit');
+  const msg = document.getElementById('rsvpMsg');
+  const err = document.getElementById('rsvpErr');
+  err.style.display = 'none';
+  btn.disabled = true;
+  btn.textContent = 'Sending…';
+
+  const payload = {
     form:      'rsvp',
+    phone:     document.getElementById('phone').value,
     name:      document.getElementById('fullname').value,
-    attending: choice ? (choice.value === 'accept' ? 'Yes' : 'No') : '',
-    website:   document.getElementById('rsvpWebsite').value
-  }, 'rsvpMsg', 'rsvpErr');
+    attending: attending
+  };
+
+  /* The sheet is the record and answers with the guest's details;
+     the email copy is fire-and-forget backup. */
+  const toSheet = fetch(ENDPOINT, {
+    method: 'POST',
+    headers: {'Content-Type': 'text/plain;charset=utf-8'},
+    body: JSON.stringify(payload)
+  }).then(r=>r.json());
+
+  sendToEmail({form:'rsvp', name: verifiedGuest.name, attending: attending}).catch(()=>{});
+
+  toSheet.then(res=>{
+    if(!res.saved){ throw new Error('not saved'); }
+    msg.textContent = (attending === 'Yes')
+      ? 'Thank you! We cannot wait to celebrate with you.'
+      : 'Thank you for letting us know. You will be missed.';
+    msg.style.display = 'block';
+    btn.textContent = 'Send RSVP';
+
+    if(attending === 'Yes'){
+      cardData = {
+        name:   document.getElementById('fullname').value,
+        phone:  document.getElementById('phone').value,
+        code:   res.code,
+        admits: res.admits || 1
+      };
+      document.getElementById('cardReady').classList.add('show');
+    } else {
+      document.getElementById('cardReady').classList.remove('show');
+    }
+  })
+  .catch(()=>{
+    err.style.display = 'block';
+    btn.disabled = false;
+    btn.textContent = 'Send RSVP';
+  });
+
+  return false;
 }
 
 /* countdown to the wedding (Nov 14 2026, 10:00 WAT / UTC+1) */
@@ -878,6 +1029,174 @@ function handleRsvp(e){
   }
   tick(); setInterval(tick,1000);
 })();
+
+/* ============================================================
+   ACCESS CARD (PDF)
+   jsPDF is ~50KB and only ever needed by a guest who accepts, so
+   it is fetched on demand rather than on page load — otherwise
+   every visitor pays for it on mobile data.
+   ============================================================ */
+let cardData = null;
+const JSPDF_URL = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
+let jsPdfLoading = null;
+
+function loadJsPdf(){
+  if(window.jspdf) return Promise.resolve(window.jspdf);
+  if(jsPdfLoading) return jsPdfLoading;
+  jsPdfLoading = new Promise((resolve, reject)=>{
+    const s = document.createElement('script');
+    s.src = JSPDF_URL;
+    s.onload = ()=> window.jspdf ? resolve(window.jspdf) : reject(new Error('jsPDF missing'));
+    s.onerror = ()=> reject(new Error('could not load jsPDF'));
+    document.head.appendChild(s);
+  });
+  return jsPdfLoading;
+}
+
+function downloadCard(){
+  if(!cardData) return;
+  const btn = document.getElementById('cardBtn');
+  const original = btn.textContent;
+  btn.disabled = true;
+  btn.textContent = 'Preparing…';
+
+  Promise.all([loadJsPdf(), loadCardArt()])
+    .then(([lib])=>{ buildCard(lib); btn.textContent = original; btn.disabled = false; })
+    .catch(()=>{ btn.textContent = 'Download failed — tap to retry'; btn.disabled = false; });
+}
+
+/* ------------------------------------------------------------
+   The card is the client's artwork with two things written onto
+   it: the access code, and the guest's name where the couple's
+   names are repeated on the right-hand stub.
+
+   Positions were measured off the artwork itself (1600x759) and
+   are stored here in image pixels, then scaled to mm. Working in
+   the artwork's own coordinates means the numbers stay meaningful
+   if the design is ever re-exported at a different resolution.
+   ------------------------------------------------------------ */
+const CARD_ART   = 'images/access-card.jpg';
+const ART_W      = 1600;
+const ART_H      = 759;
+const CARD_MM_W  = 190;                                  /* prints nicely on A4 */
+const CARD_MM_H  = +(CARD_MM_W * ART_H / ART_W).toFixed(2);
+const PX         = CARD_MM_W / ART_W;                    /* px -> mm */
+
+/* Measured gaps in the artwork:
+     ENGAGEMENT CEREMONY ends y=362, Date line starts y=473,
+     and x 214..880 is pure white there — so the code sits in
+     clear space and covers none of the design.
+     The plane graphic starts at x=909, so we stay left of it.  */
+const CODE_CX    = 459;   /* centre of the ENGAGEMENT CEREMONY block */
+const CODE_LABEL = 400;
+const CODE_BASE  = 447;
+
+/* The couple's names are repeated on the stub at x 1315..1530,
+   y 97..180 — that block is replaced by the guest's name. */
+const NAME_BOX   = { x0: 1297, y0: 88, x1: 1548, y1: 192 };
+
+let cardArtData = null;
+function loadCardArt(){
+  if(cardArtData) return Promise.resolve(cardArtData);
+  return new Promise((resolve, reject)=>{
+    const img = new Image();
+    img.onload = ()=>{
+      const c = document.createElement('canvas');
+      c.width = img.naturalWidth; c.height = img.naturalHeight;
+      c.getContext('2d').drawImage(img, 0, 0);
+      cardArtData = c.toDataURL('image/jpeg', 0.92);
+      resolve(cardArtData);
+    };
+    img.onerror = ()=> reject(new Error('could not load card artwork'));
+    img.src = CARD_ART;
+  });
+}
+
+function buildCard(lib){
+  const { jsPDF } = lib;
+  const doc = new jsPDF({orientation:'landscape', unit:'mm', format:[CARD_MM_W, CARD_MM_H]});
+
+  /* Colours sampled from the artwork so the additions match it. */
+  const INK    = [51, 50, 51];
+  const ORANGE = [204, 86, 0];
+  const GOLD   = [176, 160, 108];
+
+  /* 1. the artwork, full bleed */
+  doc.addImage(cardArtData, 'JPEG', 0, 0, CARD_MM_W, CARD_MM_H);
+
+  /* 2. the access code, in the clear white gap between
+        ENGAGEMENT CEREMONY and the Date/Venue block */
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(7);
+  doc.setTextColor.apply(doc, ORANGE);
+  doc.text('A C C E S S   C O D E', CODE_CX * PX, CODE_LABEL * PX, {align:'center'});
+
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(30);
+  doc.setTextColor.apply(doc, INK);
+  doc.text(String(cardData.code || '—'), CODE_CX * PX, CODE_BASE * PX, {align:'center'});
+
+  const admits = Number(cardData.admits) || 1;
+  if(admits > 1){
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(7.5);
+    doc.setTextColor.apply(doc, ORANGE);
+    doc.text('Admits ' + admits, CODE_CX * PX, (CODE_BASE + 34) * PX, {align:'center'});
+  }
+
+  /* 3. the guest's name replaces the couple's names on the stub.
+        That block is painted out first — the surrounding paper is
+        plain white, so a white rectangle is invisible. */
+  doc.setFillColor(255, 255, 255);
+  doc.rect(NAME_BOX.x0 * PX, NAME_BOX.y0 * PX,
+           (NAME_BOX.x1 - NAME_BOX.x0) * PX,
+           (NAME_BOX.y1 - NAME_BOX.y0) * PX, 'F');
+
+  const boxW  = (NAME_BOX.x1 - NAME_BOX.x0) * PX;
+  const centre = (NAME_BOX.x0 + NAME_BOX.x1) / 2 * PX;
+  const guest = String(cardData.name || '').trim().toUpperCase();
+
+  doc.setFont('times', 'bold');
+  doc.setTextColor.apply(doc, GOLD);
+
+  /* Shrink, then wrap, so even a long double-barrelled name stays
+     inside the stub instead of running over the barcode. */
+  let size = 20;
+  doc.setFontSize(size);
+  let lines = [guest];
+  while(size > 8 && doc.getTextWidth(guest) > boxW){
+    size -= 0.5;
+    doc.setFontSize(size);
+  }
+  if(size <= 12){
+    size = 15;
+    doc.setFontSize(size);
+    lines = doc.splitTextToSize(guest, boxW);
+    while(size > 7 && lines.length > 3){
+      size -= 0.5;
+      doc.setFontSize(size);
+      lines = doc.splitTextToSize(guest, boxW);
+    }
+  }
+
+  const lineH = size * 0.352778 * 1.15;
+  const blockMid = (NAME_BOX.y0 + NAME_BOX.y1) / 2 * PX;
+  let y = blockMid - (lines.length - 1) * lineH / 2 + lineH * 0.32;
+  lines.forEach(line=>{ doc.text(line, centre, y, {align:'center'}); y += lineH; });
+
+  const safe = (cardData.name || 'guest').replace(/[^a-zA-Z0-9]+/g, '-').toLowerCase();
+  doc.save('aishat-nnamdi-wedding-pass-' + safe + '.pdf');
+}
+
+/* Shrink a long name until it fits, so it can never run off the card. */
+function fit(doc, text, maxMm){
+  let size = doc.getFontSize();
+  while(size > 6 && doc.getStringUnitWidth(text) * size / doc.internal.scaleFactor > maxMm){
+    size -= 0.5;
+    doc.setFontSize(size);
+  }
+  return text;
+}
 
 /* lightbox */
 const galleryImgs = Array.from(document.querySelectorAll('.gal-mosaic img')).map(i=>i.src);
