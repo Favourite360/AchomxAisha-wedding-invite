@@ -55,7 +55,7 @@
 
 const SHEET_ID = '14qG_Ni9zK2nXxF-EzJKYPxTULax5B2YP703NKJTLYI4';
 
-const SCRIPT_VERSION = 'v7 — phone-only guest list';
+const SCRIPT_VERSION = 'v8 — one reply per guest';
 
 /* Accepts a bare ID or a full spreadsheet URL. */
 function resolveSheetId(value) {
@@ -169,16 +169,32 @@ function findGuest(phone) {
    per phone number, so the code found there is the one already
    issued — which is what makes a re-download return the same
    card rather than a fresh number. */
-function existingCode(phone) {
+/* Has this number already replied? Returns their answer, or null.
+   An RSVP is final: this is what stops anyone answering twice. */
+function priorRsvp(phone) {
   const sheet = getTab(TABS.rsvp);
   const lastRow = sheet.getLastRow();
-  if (lastRow < 2) return '';
+  if (lastRow < 2) return null;
+
   const key = normalisePhone(phone);
-  const rows = sheet.getRange(2, 3, lastRow - 1, 3).getValues();  /* Phone, Attending, Code */
+  const rows = sheet.getRange(2, 1, lastRow - 1, 6).getValues();
   for (let i = 0; i < rows.length; i++) {
-    if (normalisePhone(rows[i][0]) === key) return String(rows[i][2] || '').trim();
+    if (normalisePhone(rows[i][2]) === key) {
+      const admits = parseInt(rows[i][5], 10);
+      return {
+        name:      String(rows[i][1] || '').trim(),
+        attending: String(rows[i][3] || '').trim(),
+        code:      String(rows[i][4] || '').trim(),
+        admits:    (admits > 0) ? admits : 1
+      };
+    }
   }
-  return '';
+  return null;
+}
+
+function existingCode(phone) {
+  const prior = priorRsvp(phone);
+  return prior ? prior.code : '';
 }
 
 function ensureCode(guest) {
@@ -247,7 +263,21 @@ function doPost(e) {
        numbers learns only whether one is on the list — no name,
        no code, no admits. */
     if (data.action === 'verify') {
-      return json({ found: !!findGuest(data.phone) });
+      const guest = findGuest(data.phone);
+      if (!guest) return json({ found: false });
+
+      const prior = priorRsvp(guest.phone);
+      if (!prior) return json({ found: true, responded: null });
+
+      /* Already replied. Accepters get their pass details back so
+         they can re-download; decliners get nothing to act on. */
+      if (prior.attending === 'Yes') {
+        return json({
+          found: true, responded: 'Yes',
+          name: prior.name, code: prior.code, admits: prior.admits
+        });
+      }
+      return json({ found: true, responded: 'No' });
     }
 
     /* --- the RSVP itself ---------------------------------------
@@ -257,12 +287,25 @@ function doPost(e) {
       const guest = findGuest(data.phone);
       if (!guest) return json({ found: false, saved: false });
 
+      /* An answer is final. Checked here rather than trusting the
+         page, because anyone can post straight to this URL. */
+      const prior = priorRsvp(guest.phone);
+      if (prior) {
+        return json({
+          found: true, saved: false, locked: true,
+          responded: prior.attending,
+          name:      prior.name,
+          code:      (prior.attending === 'Yes') ? prior.code : '',
+          admits:    prior.admits
+        });
+      }
+
       const attending = (String(data.attending) === 'Yes') ? 'Yes' : 'No';
 
       /* The guest types their own name, so that is what goes on
          the record and the card. Code and admits always come from
          the sheet, never from the browser. */
-      const givenName = clean(data.name) || guest.name;
+      const givenName = clean(data.name);
 
       /* Only guests who are actually coming need a pass, so a
          decline never burns a code. */
