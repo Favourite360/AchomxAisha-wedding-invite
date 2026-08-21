@@ -34,7 +34,9 @@
   --script:'Great Vibes', 'Cormorant Garamond', cursive;
 }
 *{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+/* stops a stray wide element letting the page scroll sideways */
+body{overflow-x:hidden}
 body{font-family:var(--sans);color:var(--ink-soft);background:var(--white);font-weight:300;line-height:1.7;font-size:17px}
 img{max-width:100%;display:block}
 a{color:var(--sky-700);text-decoration:none}
@@ -151,8 +153,16 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,
 .gal-photo:nth-child(4n+3){transform:rotate(-1deg)}
 .gal-photo:nth-child(4n){transform:rotate(2.4deg);margin-top:-10px}
 .gal-photo::after{content:"";position:absolute;inset:8px;border:1px solid rgba(201,162,39,.35);border-radius:2px;pointer-events:none;opacity:0;transition:opacity .4s}
-.gal-photo:hover{transform:rotate(0) scale(1.05);box-shadow:0 20px 46px rgba(43,58,68,.3);z-index:6}
-.gal-photo:hover::after{opacity:1}
+/* Hover lift only where there is a real pointer. On a touch
+   screen :hover sticks after a tap, leaving a photo stuck at 1.05
+   and overlapping its neighbours. */
+@media(hover:hover){
+  .gal-photo:hover{transform:rotate(0) scale(1.05);box-shadow:0 20px 46px rgba(43,58,68,.3);z-index:6}
+  .gal-photo:hover::after{opacity:1}
+}
+@media(hover:none){
+  .gal-photo:active{transform:rotate(0) scale(1.02)}
+}
 
 /* lightbox */
 .lightbox{position:fixed;inset:0;background:rgba(43,58,68,.9);z-index:300;display:none;align-items:center;justify-content:center;padding:1.5rem}
@@ -243,6 +253,11 @@ footer .hashtag{margin-top:1rem}
 .card-ready{display:none;margin-top:1.6rem;padding-top:1.4rem;border-top:1px solid var(--sky-200)}
 .card-ready.show{display:block}
 .card-ready-note{font-family:var(--serif);font-style:italic;color:var(--ink);margin-bottom:.9rem}
+.card-fallback{display:none;margin-top:.9rem;font-size:.85rem;text-decoration:underline;color:var(--sky-700)}
+.card-fallback.show{display:inline-block}
+
+/* party popper canvas — sits above everything, catches no taps */
+.confetti-layer{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:400}
 
 /* honeypot — hidden from people, irresistible to bots */
 .hp-field{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
@@ -254,7 +269,40 @@ footer .hashtag{margin-top:1rem}
   0%,100%{color:#C9A227;text-shadow:0 0 6px rgba(201,162,39,.55)}
   50%{color:#E8C766;text-shadow:0 0 14px rgba(232,199,102,.9)}
 }
-@media(prefers-reduced-motion:reduce){.blink{animation:none;color:#C9A227}}
+@media(prefers-reduced-motion:reduce){
+  .blink{animation:none;color:#C9A227}
+  .scroll-cue{animation:none}
+  .reveal,.js .reveal{transition:none;opacity:1;transform:none}
+}
+
+/* ---------- phones ---------- */
+@media(max-width:620px){
+  section{padding:4rem 1.2rem}
+  .section-title{margin-bottom:1.8rem}
+  .rsvp-box{padding:2rem 1.3rem}
+  .modal{padding:2rem 1.3rem}
+  .card{padding:2rem 1.4rem}
+  .radio-pill{min-width:0}          /* let both choices share a row */
+  .lb-nav{font-size:2rem;padding:.4rem .6rem}
+  .lb-close{top:.6rem;right:.8rem}
+  .timeline{padding:0 .2rem}
+}
+
+/* The countdown is four boxes in a row; below ~380px the fixed
+   minimum width pushed it wider than the screen and the whole
+   page could be scrolled sideways. */
+@media(max-width:420px){
+  .countdown{gap:.45rem}
+  .cd-box{min-width:0;flex:1 1 0;padding:.6rem .25rem}
+  .cd-label{font-size:.55rem;letter-spacing:.12em}
+}
+
+/* Fill the screen without fighting mobile browser chrome: 100vh
+   counts the address bar that then slides away, which left a gap
+   under the hero on scroll. */
+@supports(height:100svh){
+  .hero{min-height:100svh}
+}
 
 /* ---------- reveal on scroll (visible by default — JS adds the animation) ---------- */
 .reveal{opacity:1;transform:none;transition:opacity .7s ease,transform .7s ease}
@@ -612,6 +660,7 @@ footer .hashtag{margin-top:1rem}
         <div class="card-ready" id="cardReady">
           <p class="card-ready-note">Your access card is ready. Please bring it with you.</p>
           <button type="button" class="btn btn-line" id="cardBtn" onclick="downloadCard()">Download access card</button>
+          <a class="card-fallback" id="cardFallback" href="#">Card didn’t open? Tap here</a>
         </div>
       </form>
       <!-- NOTE FOR DEV: wire this form to Formspree, Google Forms, or a
@@ -980,6 +1029,7 @@ function verifyPhone(){
       const btn = document.getElementById('rsvpSubmit');
       btn.textContent = 'Download access card';
       btn.disabled = false;
+      primeCardAssets();   /* so the tap has nothing to wait for */
 
     } else if(res.found && res.responded === 'No'){
       /* Already declined, and that cannot be undone from here. */
@@ -1050,6 +1100,7 @@ function handleRsvp(e){
         lockForm('You have already accepted. Your access card is below.');
         btn.textContent = 'Download access card';
         btn.disabled = false;
+        primeCardAssets();
       } else {
         rsvpMode = 'locked';
         lockForm('You have already replied to this invitation.');
@@ -1071,6 +1122,8 @@ function handleRsvp(e){
         admits: res.admits || 1
       };
       document.getElementById('cardReady').classList.add('show');
+      primeCardAssets();
+      celebrate();
     } else {
       document.getElementById('cardReady').classList.remove('show');
     }
@@ -1108,6 +1161,95 @@ function handleRsvp(e){
 })();
 
 /* ============================================================
+   PARTY POPPER
+   Two bursts from the lower corners in the wedding colours. Hand
+   written rather than pulling in a confetti library — it is about
+   50 lines and saves every guest downloading another script on
+   mobile data. The canvas removes itself when the last piece
+   falls, so nothing keeps running in the background.
+   ============================================================ */
+function celebrate(){
+  /* Never override someone who has asked for less motion. */
+  if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const canvas = document.createElement('canvas');
+  canvas.className = 'confetti-layer';
+  document.body.appendChild(canvas);
+  const ctx = canvas.getContext('2d');
+
+  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+  function size(){
+    canvas.width  = window.innerWidth  * dpr;
+    canvas.height = window.innerHeight * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  size();
+  window.addEventListener('resize', size);
+
+  const COLOURS = ['#CC5500', '#C9A227', '#E8C766', '#F7F1E4', '#5B8DB8', '#FFFFFF'];
+  const W = ()=> window.innerWidth;
+  const H = ()=> window.innerHeight;
+  const bits = [];
+
+  /* Fewer pieces on a phone — same effect, no dropped frames. */
+  const perBurst = W() < 600 ? 45 : 80;
+
+  function burst(originX, originY, angle){
+    for(let i = 0; i < perBurst; i++){
+      const spread = (Math.random() - 0.5) * 1.1;
+      const speed  = 9 + Math.random() * 9;
+      bits.push({
+        x: originX, y: originY,
+        vx: Math.cos(angle + spread) * speed,
+        vy: Math.sin(angle + spread) * speed,
+        w: 6 + Math.random() * 6,
+        h: 4 + Math.random() * 5,
+        rot: Math.random() * Math.PI,
+        spin: (Math.random() - 0.5) * 0.3,
+        colour: COLOURS[(Math.random() * COLOURS.length) | 0],
+        life: 0
+      });
+    }
+  }
+  burst(W() * 0.08, H() * 0.92, -Math.PI / 3.2);
+  burst(W() * 0.92, H() * 0.92, -Math.PI + Math.PI / 3.2);
+
+  const GRAVITY = 0.32, DRAG = 0.988;
+  let frames = 0;
+
+  function tick(){
+    ctx.clearRect(0, 0, W(), H());
+    let alive = 0;
+    for(let i = 0; i < bits.length; i++){
+      const b = bits[i];
+      b.vx *= DRAG;
+      b.vy = b.vy * DRAG + GRAVITY;
+      b.x += b.vx;
+      b.y += b.vy;
+      b.rot += b.spin;
+      b.life++;
+      if(b.y > H() + 40) continue;
+      alive++;
+      ctx.save();
+      ctx.translate(b.x, b.y);
+      ctx.rotate(b.rot);
+      ctx.globalAlpha = Math.max(0, 1 - b.life / 190);
+      ctx.fillStyle = b.colour;
+      ctx.fillRect(-b.w / 2, -b.h / 2, b.w, b.h);
+      ctx.restore();
+    }
+    frames++;
+    if(alive > 0 && frames < 420){
+      requestAnimationFrame(tick);
+    } else {
+      window.removeEventListener('resize', size);
+      canvas.remove();
+    }
+  }
+  requestAnimationFrame(tick);
+}
+
+/* ============================================================
    ACCESS CARD (PDF)
    jsPDF is ~50KB and only ever needed by a guest who accepts, so
    it is fetched on demand rather than on page load — otherwise
@@ -1130,16 +1272,54 @@ function loadJsPdf(){
   return jsPdfLoading;
 }
 
+/* Fetch the library and artwork the moment we know a card will be
+   wanted, so the tap itself has nothing to wait for. This is what
+   makes the download work on phones: a mobile browser only allows
+   a programmatic download while the user's tap is still "active",
+   and awaiting a network round trip inside the handler burns that
+   permission. Desktop is forgiving about it; iOS Safari is not. */
+function primeCardAssets(){
+  loadJsPdf().catch(function(){});
+  loadCardArt().catch(function(){});
+}
+
+function cardAssetsReady(){
+  return !!(window.jspdf && cardArtData);
+}
+
 function downloadCard(){
   if(!cardData) return;
   const btn = document.getElementById('cardBtn');
+
+  /* Ready: build and hand over inside the tap, no awaiting. */
+  if(cardAssetsReady()){
+    try { buildCard(window.jspdf); }
+    catch(e){ cardFallbackMessage(); }
+    return;
+  }
+
+  /* Not ready — usually a slow connection on a first visit. We
+     have to wait, which may cost us the automatic download, so a
+     tappable link is offered as well. */
   const original = btn.textContent;
   btn.disabled = true;
   btn.textContent = 'Preparing…';
-
   Promise.all([loadJsPdf(), loadCardArt()])
-    .then(([lib])=>{ buildCard(lib); btn.textContent = original; btn.disabled = false; })
-    .catch(()=>{ btn.textContent = 'Download failed — tap to retry'; btn.disabled = false; });
+    .then(function(){
+      btn.textContent = original;
+      btn.disabled = false;
+      try { buildCard(window.jspdf); }
+      catch(e){ cardFallbackMessage(); }
+    })
+    .catch(function(){
+      btn.textContent = 'Download failed — tap to retry';
+      btn.disabled = false;
+    });
+}
+
+function cardFallbackMessage(){
+  const link = document.getElementById('cardFallback');
+  if(link) link.classList.add('show');
 }
 
 /* ------------------------------------------------------------
@@ -1302,7 +1482,40 @@ function buildCard(lib){
   lines.forEach(line=>{ doc.text(line, centre, y, {align:'center'}); y += lineH; });
 
   const safe = (cardData.name || 'guest').replace(/[^a-zA-Z0-9]+/g, '-').toLowerCase();
-  doc.save('aishat-nnamdi-wedding-pass-' + safe + '.pdf');
+  deliverPdf(doc, 'aishat-nnamdi-wedding-pass-' + safe + '.pdf');
+}
+
+/* jsPDF's own save() is a thin wrapper around an anchor click, but
+   doing it by hand lets us keep the blob URL and expose it as a
+   real link — the escape hatch for iOS, where an automatic
+   download is sometimes ignored and the guest is left with a
+   button that appears to do nothing. */
+function deliverPdf(doc, filename){
+  const blob = doc.output('blob');
+  const url  = URL.createObjectURL(blob);
+
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  a.rel = 'noopener';
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+
+  const link = document.getElementById('cardFallback');
+  if(link){
+    link.href = url;
+    link.setAttribute('download', filename);
+    /* Shown only on iOS/iPadOS, where the automatic download is
+       unreliable. Elsewhere the file has already arrived and an
+       extra link would just be confusing. */
+    if(/iPad|iPhone|iPod/.test(navigator.userAgent) ||
+       (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)){
+      link.classList.add('show');
+    }
+  }
+
+  setTimeout(function(){ URL.revokeObjectURL(url); }, 120000);
 }
 
 /* Shrink a long name until it fits, so it can never run off the card. */
