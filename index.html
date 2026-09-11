@@ -862,7 +862,7 @@ document.querySelectorAll('.nav-links a').forEach(a=>{
 /* Two independent destinations, so one failing does not lose a
    response: the Google Sheet is the record the couple works from,
    FormSubmit emails a copy as the backup. */
-const ENDPOINT = 'https://script.google.com/macros/s/AKfycbwc4jGmmqYOhiuuDqlsw1oOfAmPgUjMgJQFNeBJlgyi7a7c8_cneFGE1jnopFeoTP1hKQ/exec';
+const ENDPOINT = 'https://script.google.com/macros/s/AKfycbzVaY2nwT3sPdXLrRecTqa-fjiei4PBgrGnGAWtYkdoq0vivJj-trCtUGs1uMhjAt5XHw/exec';
 /* FormSubmit alias, not the raw address — the endpoint is visible
    in page source, and a plain mailto in public HTML gets scraped. */
 const EMAIL_ENDPOINT = 'https://formsubmit.co/ajax/78f71733a93515a0c8dfaa8fe7c1d6e0';
@@ -1652,7 +1652,8 @@ const musicBtn = document.getElementById('musicBtn');
 let musicStopped = false;
 
 /* how loud the track sits under the page, and how long the fades take */
-const MUSIC_VOLUME = 0.28;
+const MUSIC_VOLUME = 0.17;          /* 40% quieter than before */
+const MUSIC_SPEED  = 0.8;           /* slower, and a touch lower */
 const FADE_MS = 1800;
 let fadeTimer = null;
 
@@ -1678,9 +1679,26 @@ function fadeTo(target, done){
   }, 50);
 }
 
+/* Slow the track down and let the pitch drop with it.
+
+   Browsers default to preserving pitch when you change speed,
+   which time-stretches the audio and leaves music sounding
+   warbly. Turning that off gives the natural tape-slowdown
+   effect instead — slower AND lower, which is the mellow,
+   in-the-background feel we are after. Re-applied on every play
+   because some browsers reset it when the source reloads. */
+function applyMusicTone(){
+  bgMusic.preservesPitch = false;
+  bgMusic.mozPreservesPitch = false;
+  bgMusic.webkitPreservesPitch = false;
+  bgMusic.playbackRate = MUSIC_SPEED;
+}
+
 function playMusic(){
   bgMusic.volume = 0;
+  applyMusicTone();
   return bgMusic.play().then(()=>{
+    applyMusicTone();
     fadeTo(MUSIC_VOLUME);
     musicBtn.classList.add('playing');
     musicBtn.setAttribute('aria-label','Pause music');
