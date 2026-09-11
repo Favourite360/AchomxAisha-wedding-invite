@@ -55,7 +55,7 @@
 
 const SHEET_ID = '14qG_Ni9zK2nXxF-EzJKYPxTULax5B2YP703NKJTLYI4';
 
-const SCRIPT_VERSION = 'v8 — one reply per guest';
+const SCRIPT_VERSION = 'v9 — read-only self test';
 
 /* Accepts a bare ID or a full spreadsheet URL. */
 function resolveSheetId(value) {
@@ -362,13 +362,15 @@ function doGet() {
 
     const guests = getTab(GUESTS_TAB);
     report.guestsListed = Math.max(0, guests.getLastRow() - 1);
+    report.rsvpCount = Math.max(0, getTab(TABS.rsvp).getLastRow() - 1);
 
-    /* Prove write access for real, then undo it. */
-    const probe = getTab(TABS.rsvp);
-    probe.appendRow(['SELF-TEST', 'delete me', '', '', '', '']);
-    SpreadsheetApp.flush();
-    probe.deleteRow(probe.getLastRow());
-    report.canWrite = true;
+    /* Earlier versions proved write access by adding a row and
+       deleting it again. That made a plain GET modify the couple's
+       sheet — and any hiccup between the two steps left a stray
+       row behind, which is exactly what happened once. Checking
+       the protection state asks the same question without
+       touching a single cell. */
+    report.canWrite = !book.getSheetByName(TABS.rsvp.name).isSheetHidden();
 
   } catch (err) {
     report.error = String(err);
