@@ -125,7 +125,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,
 .cd-box{min-width:78px;background:rgba(255,255,255,.55);border:1px solid var(--gold-soft);border-radius:12px;padding:.75rem .55rem;backdrop-filter:blur(5px);box-shadow:0 6px 20px rgba(201,162,39,.12)}
 .cd-num{font-family:var(--display);font-size:2rem;font-weight:600;color:var(--ink);line-height:1;font-variant-numeric:tabular-nums}
 .cd-label{font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--sky-600);margin-top:.4rem}
-@media(max-width:420px){.cd-box{min-width:64px;padding:.6rem .4rem}.cd-num{font-size:1.6rem}}
+@media(max-width:420px){.cd-num{font-size:1.6rem}}
 .scroll-cue{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;color:var(--sky-600);animation:bob 2.2s ease-in-out infinite}
 @keyframes bob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,8px)}}
 
@@ -335,9 +335,28 @@ footer .hashtag{margin-top:1rem}
 
 /* Fill the screen without fighting mobile browser chrome: 100vh
    counts the address bar that then slides away, which left a gap
-   under the hero on scroll. */
+   under the hero on scroll. The lightbox and gift modal had the
+   same problem in reverse — sized against the taller vh, their
+   bottoms sat under the browser bar and the close button could be
+   out of reach. */
 @supports(height:100svh){
   .hero{min-height:100svh}
+  .lightbox img{max-height:84svh}
+  .modal{max-height:86svh}
+}
+
+/* The music button sits bottom-right, which on a notched iPhone
+   is where the home indicator lives. */
+.music-btn{
+  bottom:calc(1.2rem + env(safe-area-inset-bottom, 0px));
+  right:calc(1.2rem + env(safe-area-inset-right, 0px));
+}
+
+/* A phone screen is narrow enough that a 48px target in the
+   corner is easy to miss; make it a little larger there. */
+@media(max-width:620px){
+  .music-btn{width:52px;height:52px}
+  .music-btn svg{width:24px;height:24px}
 }
 
 /* ---------- reveal on scroll (visible by default — JS adds the animation) ---------- */
@@ -628,27 +647,26 @@ footer .hashtag{margin-top:1rem}
       <figure class="gal-photo" onclick="openLightbox(0)"><img src="images/gal-01.jpg" alt="Aishat &amp; Nnamdi" loading="lazy" /></figure>
       <figure class="gal-photo" onclick="openLightbox(1)"><img src="images/story-5.jpeg" alt="Aishat &amp; Nnamdi" loading="lazy" /></figure>
       <figure class="gal-photo" onclick="openLightbox(2)"><img src="images/gal-04.jpg" alt="Aishat &amp; Nnamdi" loading="lazy" /></figure>
-      <figure class="gal-photo" onclick="openLightbox(3)"><img src="images/gal-07.jpg" alt="Aishat &amp; Nnamdi" loading="lazy" /></figure>
-      <figure class="gal-photo" onclick="openLightbox(4)"><img src="images/gal-08.jpg" alt="Aishat &amp; Nnamdi" loading="lazy" /></figure>
-      <figure class="gal-photo" onclick="openLightbox(5)"><img src="images/formal-01.jpg" alt="Aishat &amp; Nnamdi" loading="lazy" /></figure>
-      <figure class="gal-photo" onclick="openLightbox(6)"><img src="images/formal-02.jpg" alt="Aishat &amp; Nnamdi" loading="lazy" /></figure>
-      <figure class="gal-photo" onclick="openLightbox(7)"><img src="images/formal-03.jpg" alt="Aishat &amp; Nnamdi" loading="lazy" /></figure>
-      <figure class="gal-photo" onclick="openLightbox(8)"><img src="images/formal-04.jpg" alt="Aishat &amp; Nnamdi" loading="lazy" /></figure>
-      <figure class="gal-photo" onclick="openLightbox(9)"><img src="images/formal-05.jpg" alt="Aishat &amp; Nnamdi" loading="lazy" /></figure>
-      <figure class="gal-photo" onclick="openLightbox(10)"><img src="images/formal-06.jpg" alt="Aishat &amp; Nnamdi" loading="lazy" /></figure>
-      <figure class="gal-photo" onclick="openLightbox(11)"><img src="images/story-traditional.jpg" alt="Aishat &amp; Nnamdi" loading="lazy" /></figure>
-      <figure class="gal-photo" onclick="openLightbox(12)"><img src="images/trad-02.jpg" alt="Aishat &amp; Nnamdi" loading="lazy" /></figure>
-      <figure class="gal-photo" onclick="openLightbox(13)"><img src="images/trad-03.jpg" alt="Aishat &amp; Nnamdi" loading="lazy" /></figure>
-      <figure class="gal-photo" onclick="openLightbox(14)"><img src="images/trad-04.jpg" alt="Aishat &amp; Nnamdi" loading="lazy" /></figure>
-      <figure class="gal-photo" onclick="openLightbox(15)"><img src="images/trad-05.jpg" alt="Aishat &amp; Nnamdi" loading="lazy" /></figure>
-      <figure class="gal-photo" onclick="openLightbox(16)"><img src="images/trad-06.jpg" alt="Aishat &amp; Nnamdi" loading="lazy" /></figure>
-      <figure class="gal-photo" onclick="openLightbox(17)"><img src="images/denim-01.jpg" alt="Aishat &amp; Nnamdi" loading="lazy" /></figure>
-      <figure class="gal-photo" onclick="openLightbox(18)"><img src="images/denim-02.jpg" alt="Aishat &amp; Nnamdi" loading="lazy" /></figure>
-      <figure class="gal-photo" onclick="openLightbox(19)"><img src="images/story-denim.jpg" alt="Aishat &amp; Nnamdi" loading="lazy" /></figure>
-      <figure class="gal-photo" onclick="openLightbox(20)"><img src="images/denim-04.jpg" alt="Aishat &amp; Nnamdi" loading="lazy" /></figure>
-      <figure class="gal-photo" onclick="openLightbox(21)"><img src="images/denim-05.jpg" alt="Aishat &amp; Nnamdi" loading="lazy" /></figure>
-      <figure class="gal-photo" onclick="openLightbox(22)"><img src="images/casual-01.jpg" alt="Aishat &amp; Nnamdi" loading="lazy" /></figure>
-      <figure class="gal-photo" onclick="openLightbox(23)"><img src="images/casual-02.jpg" alt="Aishat &amp; Nnamdi" loading="lazy" /></figure>
+      <figure class="gal-photo" onclick="openLightbox(3)"><img src="images/gal-08.jpg" alt="Aishat &amp; Nnamdi" loading="lazy" /></figure>
+      <figure class="gal-photo" onclick="openLightbox(4)"><img src="images/formal-01.jpg" alt="Aishat &amp; Nnamdi" loading="lazy" /></figure>
+      <figure class="gal-photo" onclick="openLightbox(5)"><img src="images/formal-02.jpg" alt="Aishat &amp; Nnamdi" loading="lazy" /></figure>
+      <figure class="gal-photo" onclick="openLightbox(6)"><img src="images/formal-03.jpg" alt="Aishat &amp; Nnamdi" loading="lazy" /></figure>
+      <figure class="gal-photo" onclick="openLightbox(7)"><img src="images/formal-04.jpg" alt="Aishat &amp; Nnamdi" loading="lazy" /></figure>
+      <figure class="gal-photo" onclick="openLightbox(8)"><img src="images/formal-05.jpg" alt="Aishat &amp; Nnamdi" loading="lazy" /></figure>
+      <figure class="gal-photo" onclick="openLightbox(9)"><img src="images/formal-06.jpg" alt="Aishat &amp; Nnamdi" loading="lazy" /></figure>
+      <figure class="gal-photo" onclick="openLightbox(10)"><img src="images/story-traditional.jpg" alt="Aishat &amp; Nnamdi" loading="lazy" /></figure>
+      <figure class="gal-photo" onclick="openLightbox(11)"><img src="images/trad-02.jpg" alt="Aishat &amp; Nnamdi" loading="lazy" /></figure>
+      <figure class="gal-photo" onclick="openLightbox(12)"><img src="images/trad-03.jpg" alt="Aishat &amp; Nnamdi" loading="lazy" /></figure>
+      <figure class="gal-photo" onclick="openLightbox(13)"><img src="images/trad-04.jpg" alt="Aishat &amp; Nnamdi" loading="lazy" /></figure>
+      <figure class="gal-photo" onclick="openLightbox(14)"><img src="images/trad-05.jpg" alt="Aishat &amp; Nnamdi" loading="lazy" /></figure>
+      <figure class="gal-photo" onclick="openLightbox(15)"><img src="images/trad-06.jpg" alt="Aishat &amp; Nnamdi" loading="lazy" /></figure>
+      <figure class="gal-photo" onclick="openLightbox(16)"><img src="images/denim-01.jpg" alt="Aishat &amp; Nnamdi" loading="lazy" /></figure>
+      <figure class="gal-photo" onclick="openLightbox(17)"><img src="images/denim-02.jpg" alt="Aishat &amp; Nnamdi" loading="lazy" /></figure>
+      <figure class="gal-photo" onclick="openLightbox(18)"><img src="images/story-denim.jpg" alt="Aishat &amp; Nnamdi" loading="lazy" /></figure>
+      <figure class="gal-photo" onclick="openLightbox(19)"><img src="images/denim-04.jpg" alt="Aishat &amp; Nnamdi" loading="lazy" /></figure>
+      <figure class="gal-photo" onclick="openLightbox(20)"><img src="images/denim-05.jpg" alt="Aishat &amp; Nnamdi" loading="lazy" /></figure>
+      <figure class="gal-photo" onclick="openLightbox(21)"><img src="images/casual-01.jpg" alt="Aishat &amp; Nnamdi" loading="lazy" /></figure>
+      <figure class="gal-photo" onclick="openLightbox(22)"><img src="images/casual-02.jpg" alt="Aishat &amp; Nnamdi" loading="lazy" /></figure>
     
     
     </div>
@@ -1687,12 +1705,39 @@ function toggleMusic(){
     pauseMusic();
   }
 }
-window.addEventListener('load', ()=>{ if(!musicStopped) playMusic().catch(()=>{}); });
-['pointerdown','keydown','touchstart','scroll'].forEach(ev=>{
-  window.addEventListener(ev, function once(){
-    if(!musicStopped && bgMusic.paused) playMusic().catch(()=>{});
-    window.removeEventListener(ev, once);
-  }, {passive:true});
+/* Browsers refuse to start audio until the visitor has interacted,
+   so we try on load and then keep trying on each interaction.
+
+   The important part is that we only stop listening once playback
+   actually succeeds. The previous version unhooked itself after
+   the very first event — and on a phone that event is nearly
+   always a scroll, which does NOT grant audio permission. It
+   failed once, detached, and the later tap that would have worked
+   had nothing listening. That is why there was no sound on mobile.
+
+   Scrolling is still worth trying on desktop, but the gestures
+   phones actually accept are touchend / click / pointerup. */
+const START_EVENTS = ['touchend','click','pointerup','keydown','scroll'];
+
+function tryStartMusic(){
+  if(musicStopped){ stopListeningForStart(); return; }
+  if(!bgMusic.paused){ stopListeningForStart(); return; }
+  playMusic().then(stopListeningForStart).catch(function(){
+    /* Not allowed yet — stay armed for the next gesture. */
+  });
+}
+
+function stopListeningForStart(){
+  START_EVENTS.forEach(function(ev){
+    window.removeEventListener(ev, tryStartMusic);
+  });
+}
+
+window.addEventListener('load', function(){
+  if(!musicStopped) playMusic().catch(function(){});
+});
+START_EVENTS.forEach(function(ev){
+  window.addEventListener(ev, tryStartMusic, {passive:true});
 });
 </script>
 </body>
