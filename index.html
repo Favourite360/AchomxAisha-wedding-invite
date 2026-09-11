@@ -72,9 +72,45 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,
 }
 
 /* ---------- hero ---------- */
-.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;background:
-  linear-gradient(rgba(234,244,251,.55),rgba(255,255,255,.9)), var(--sky-50);
+/* The couple's photo sits behind the banner. The gradient on top
+   does two jobs: it washes the photo's white studio backdrop to
+   the same light blue as the rest of the section, and it keeps
+   the background pale enough for the dark headings to stay
+   readable — the text is sky-700 and ink, so the backdrop has to
+   remain light rather than being darkened. */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+  background-color:var(--sky-50);
+  background-image:
+    linear-gradient(180deg,
+      rgba(234,244,251,.70) 0%,
+      rgba(234,244,251,.63) 42%,
+      rgba(234,244,251,.83) 78%,
+      rgba(243,249,253,.95) 100%),
+    url('images/hero-bg.jpg');
+  background-size:cover;
+  background-position:center 18%;   /* keeps their faces in frame */
+  background-repeat:no-repeat;
   padding:7rem 1.5rem 4rem;position:relative}
+
+/* The couple are dressed in black and the headings are dark blue,
+   so where the two overlap the contrast collapses. A soft white
+   halo keeps every line readable without having to wash the photo
+   out until it disappears. */
+.hero .kicker,.hero-name,.hero .amp,.hero-date,.hero-tag,.hero .hashtag,.scroll-cue{
+  text-shadow:0 1px 10px rgba(255,255,255,.92),0 0 24px rgba(255,255,255,.75)}
+
+/* A touch more wash on phones, where the photo crops in tighter
+   and the names sit right over the busiest part of it. */
+@media(max-width:620px){
+  .hero{background-image:
+    linear-gradient(180deg,
+      rgba(234,244,251,.72) 0%,
+      rgba(234,244,251,.66) 45%,
+      rgba(234,244,251,.86) 80%,
+      rgba(243,249,253,.96) 100%),
+    url('images/hero-bg.jpg');
+    background-position:center 12%}
+}
 .hero .kicker{margin-bottom:1.6rem}
 .hero-name{font-family:var(--script);font-size:clamp(3.6rem,11vw,7.2rem);font-weight:400;color:var(--sky-700);line-height:1;letter-spacing:.02em}
 .amp{font-family:var(--script);font-style:normal;font-size:clamp(2.4rem,6vw,4rem);color:var(--gold-deep);margin:-.2rem 0;line-height:1}
@@ -365,7 +401,7 @@ footer .hashtag{margin-top:1rem}
         <p><strong>Him:</strong> A colleague in the office told me about a new girl the company just hired, and I should check her out, I told him we entered the same &lsquo;keke&rsquo; while coming to work. So, we had our usual Friday happy hour organized by the director, there she was beautiful and shy. I took interest immediately.</p>
       </div>
       <span class="dot"></span>
-      <div class="story-img"><img src="images/story-1.jpeg" alt="How We Met" loading="lazy" /></div>
+      <div class="story-img"><img src="images/story-2.jpeg" alt="How We Met" loading="lazy" /></div>
     </div>
 
     <div class="story reveal">
@@ -375,7 +411,7 @@ footer .hashtag{margin-top:1rem}
         <p>Nothing about us was hurried. What began as a workplace friendship kept deepening quietly - a message here, a birthday wish there, little moments that always found their way back to each other. Then came a company outing in March 2024, where one conversation flowed so easily it felt like we had never been apart.</p>
       </div>
       <span class="dot"></span>
-      <div class="story-img"><img src="images/story-2.jpeg" alt="The Journey" loading="lazy" /></div>
+      <div class="story-img"><img src="images/story-5.jpeg" alt="The Journey" loading="lazy" /></div>
     </div>
 
     <div class="story reveal">
@@ -396,7 +432,7 @@ footer .hashtag{margin-top:1rem}
         <p>Friendship, patience, and peace - that is the ground we stand on. We did not drift into each other; we picked each other, deliberately, and we keep picking each other every day. Over two years on, we have learnt each other with calm and understanding. Nnamdi&rsquo;s steady, easy nature keeps us balanced, and what we have built together is strong, safe, and rooted in real respect. Young as we are, we know exactly what we want - and we have found it in each other.</p>
       </div>
       <span class="dot"></span>
-      <div class="story-img"><img src="images/story-4.jpeg" alt="What Makes Us, Us" loading="lazy" /></div>
+      <div class="story-img"><img src="images/story-denim.jpg" alt="What Makes Us, Us" loading="lazy" /></div>
     </div>
 
     <div class="story reveal">
@@ -406,7 +442,7 @@ footer .hashtag{margin-top:1rem}
         <p>So after all the friendship, the growing, and the choosing, forever was the only answer left. We are stepping into the life ahead with open hearts - two people learning, stretching, and becoming better side by side. Ours is more than a romance. It is proof of friendship, of certainty, and of the quiet strength in choosing the same person every single morning.</p>
       </div>
       <span class="dot"></span>
-      <div class="story-img"><img src="images/story-5.jpeg" alt="The Next Chapter" loading="lazy" /></div>
+      <div class="story-img"><img src="images/story-traditional.jpg" alt="The Next Chapter" loading="lazy" /></div>
     </div>
 
   </div>
@@ -589,17 +625,32 @@ footer .hashtag{margin-top:1rem}
     <h2 class="section-title">Gallery</h2>
     <div class="section-line"></div>
     <div class="gal-mosaic">
-      <figure class="gal-photo" onclick="openLightbox(0)"><img src="images/gal-01.jpg" alt="Aishat & Nnamdi" loading="lazy" /></figure>
-      <figure class="gal-photo" onclick="openLightbox(1)"><img src="images/story-5.jpeg" alt="Aishat & Nnamdi" loading="lazy" /></figure>
-      <figure class="gal-photo" onclick="openLightbox(2)"><img src="images/gal-03.jpg" alt="Aishat & Nnamdi" loading="lazy" /></figure>
-      <figure class="gal-photo" onclick="openLightbox(3)"><img src="images/gal-04.jpg" alt="Aishat & Nnamdi" loading="lazy" /></figure>
-      <figure class="gal-photo" onclick="openLightbox(4)"><img src="images/gal-05.jpg" alt="Aishat & Nnamdi" loading="lazy" /></figure>
-      <figure class="gal-photo" onclick="openLightbox(5)"><img src="images/gal-06.jpg" alt="Aishat & Nnamdi" loading="lazy" /></figure>
-      <figure class="gal-photo" onclick="openLightbox(6)"><img src="images/gal-07.jpg" alt="Aishat & Nnamdi" loading="lazy" /></figure>
-      <figure class="gal-photo" onclick="openLightbox(7)"><img src="images/gal-08.jpg" alt="Aishat & Nnamdi" loading="lazy" /></figure>
-      <figure class="gal-photo" onclick="openLightbox(8)"><img src="images/gal-09.jpg" alt="Aishat & Nnamdi" loading="lazy" /></figure>
-      <figure class="gal-photo" onclick="openLightbox(9)"><img src="images/gal-11.jpg" alt="Aishat & Nnamdi" loading="lazy" /></figure>
-      <figure class="gal-photo" onclick="openLightbox(10)"><img src="images/gal-12.jpg" alt="Aishat & Nnamdi" loading="lazy" /></figure>
+      <figure class="gal-photo" onclick="openLightbox(0)"><img src="images/gal-01.jpg" alt="Aishat &amp; Nnamdi" loading="lazy" /></figure>
+      <figure class="gal-photo" onclick="openLightbox(1)"><img src="images/story-5.jpeg" alt="Aishat &amp; Nnamdi" loading="lazy" /></figure>
+      <figure class="gal-photo" onclick="openLightbox(2)"><img src="images/gal-04.jpg" alt="Aishat &amp; Nnamdi" loading="lazy" /></figure>
+      <figure class="gal-photo" onclick="openLightbox(3)"><img src="images/gal-07.jpg" alt="Aishat &amp; Nnamdi" loading="lazy" /></figure>
+      <figure class="gal-photo" onclick="openLightbox(4)"><img src="images/gal-08.jpg" alt="Aishat &amp; Nnamdi" loading="lazy" /></figure>
+      <figure class="gal-photo" onclick="openLightbox(5)"><img src="images/formal-01.jpg" alt="Aishat &amp; Nnamdi" loading="lazy" /></figure>
+      <figure class="gal-photo" onclick="openLightbox(6)"><img src="images/formal-02.jpg" alt="Aishat &amp; Nnamdi" loading="lazy" /></figure>
+      <figure class="gal-photo" onclick="openLightbox(7)"><img src="images/formal-03.jpg" alt="Aishat &amp; Nnamdi" loading="lazy" /></figure>
+      <figure class="gal-photo" onclick="openLightbox(8)"><img src="images/formal-04.jpg" alt="Aishat &amp; Nnamdi" loading="lazy" /></figure>
+      <figure class="gal-photo" onclick="openLightbox(9)"><img src="images/formal-05.jpg" alt="Aishat &amp; Nnamdi" loading="lazy" /></figure>
+      <figure class="gal-photo" onclick="openLightbox(10)"><img src="images/formal-06.jpg" alt="Aishat &amp; Nnamdi" loading="lazy" /></figure>
+      <figure class="gal-photo" onclick="openLightbox(11)"><img src="images/story-traditional.jpg" alt="Aishat &amp; Nnamdi" loading="lazy" /></figure>
+      <figure class="gal-photo" onclick="openLightbox(12)"><img src="images/trad-02.jpg" alt="Aishat &amp; Nnamdi" loading="lazy" /></figure>
+      <figure class="gal-photo" onclick="openLightbox(13)"><img src="images/trad-03.jpg" alt="Aishat &amp; Nnamdi" loading="lazy" /></figure>
+      <figure class="gal-photo" onclick="openLightbox(14)"><img src="images/trad-04.jpg" alt="Aishat &amp; Nnamdi" loading="lazy" /></figure>
+      <figure class="gal-photo" onclick="openLightbox(15)"><img src="images/trad-05.jpg" alt="Aishat &amp; Nnamdi" loading="lazy" /></figure>
+      <figure class="gal-photo" onclick="openLightbox(16)"><img src="images/trad-06.jpg" alt="Aishat &amp; Nnamdi" loading="lazy" /></figure>
+      <figure class="gal-photo" onclick="openLightbox(17)"><img src="images/denim-01.jpg" alt="Aishat &amp; Nnamdi" loading="lazy" /></figure>
+      <figure class="gal-photo" onclick="openLightbox(18)"><img src="images/denim-02.jpg" alt="Aishat &amp; Nnamdi" loading="lazy" /></figure>
+      <figure class="gal-photo" onclick="openLightbox(19)"><img src="images/story-denim.jpg" alt="Aishat &amp; Nnamdi" loading="lazy" /></figure>
+      <figure class="gal-photo" onclick="openLightbox(20)"><img src="images/denim-04.jpg" alt="Aishat &amp; Nnamdi" loading="lazy" /></figure>
+      <figure class="gal-photo" onclick="openLightbox(21)"><img src="images/denim-05.jpg" alt="Aishat &amp; Nnamdi" loading="lazy" /></figure>
+      <figure class="gal-photo" onclick="openLightbox(22)"><img src="images/casual-01.jpg" alt="Aishat &amp; Nnamdi" loading="lazy" /></figure>
+      <figure class="gal-photo" onclick="openLightbox(23)"><img src="images/casual-02.jpg" alt="Aishat &amp; Nnamdi" loading="lazy" /></figure>
+    
+    
     </div>
   </div>
 </section>
@@ -659,9 +710,11 @@ footer .hashtag{margin-top:1rem}
         <p class="form-error" id="rsvpErr">Sorry — that didn’t send. Please check your connection and try again.</p>
         <div class="card-ready" id="cardReady">
           <p class="card-ready-note">Your access card is ready. Please bring it with you.</p>
-          <button type="button" class="btn btn-line" id="cardBtn" onclick="downloadCard()">Download access card</button>
-          <a class="card-fallback" id="cardFallback" href="#">Card didn’t open? Tap here</a>
+          <button type="button" class="btn btn-line" id="cardBtn" onclick="downloadCard(this)">Download access card</button>
         </div>
+        <!-- Kept outside the block above so it is still reachable for
+             a returning guest, when that block is hidden. -->
+        <a class="card-fallback" id="cardFallback" href="#">Card didn’t open? Tap here</a>
       </form>
       <!-- NOTE FOR DEV: wire this form to Formspree, Google Forms, or a
            WhatsApp deep link before launch. Currently front-end only. -->
@@ -945,6 +998,14 @@ let rsvpMode = 'submit';
 function lockForm(message){
   document.getElementById('attendField').style.display = 'none';
   document.getElementById('fullname').closest('.field').style.display = 'none';
+
+  /* Hiding a required field does NOT exempt it from validation —
+     the browser silently refuses to submit and the click appears
+     to do nothing. Disabling is what actually takes them out of
+     the check. */
+  document.getElementById('fullname').disabled = true;
+  document.querySelectorAll('input[name=attend]').forEach(function(r){ r.disabled = true; });
+
   document.getElementById('rsvpErr').style.display = 'none';
   const msg = document.getElementById('rsvpMsg');
   msg.textContent = message;
@@ -957,12 +1018,32 @@ function lockForm(message){
 function unlockForm(){
   document.getElementById('attendField').style.display = '';
   document.getElementById('fullname').closest('.field').style.display = '';
+  document.getElementById('fullname').disabled = false;
+  document.querySelectorAll('input[name=attend]').forEach(function(r){ r.disabled = false; });
+
   const btn = document.getElementById('rsvpSubmit');
+  btn.type = 'submit';
+  btn.onclick = null;
   btn.textContent = 'Send RSVP';
   btn.disabled = true;
+
   document.getElementById('rsvpMsg').style.display = 'none';
   document.getElementById('rsvpErr').style.display = 'none';
   document.getElementById('cardReady').classList.remove('show');
+  const fb = document.getElementById('cardFallback');
+  if(fb) fb.classList.remove('show');
+}
+
+/* Turns the RSVP button into a plain download button. Taking it
+   out of the form entirely means form validation can never stand
+   between a returning guest and their card. */
+function setDownloadButton(){
+  const btn = document.getElementById('rsvpSubmit');
+  btn.type = 'button';
+  btn.textContent = 'Download access card';
+  btn.disabled = false;
+  btn.onclick = function(){ downloadCard(btn); };
+  primeCardAssets();
 }
 
 /* Same rule the script uses: compare the last 10 digits, so
@@ -1025,11 +1106,8 @@ function verifyPhone(){
         code:   res.code,
         admits: res.admits || 1
       };
-      lockForm('You have already accepted. Your access card is below.');
-      const btn = document.getElementById('rsvpSubmit');
-      btn.textContent = 'Download access card';
-      btn.disabled = false;
-      primeCardAssets();   /* so the tap has nothing to wait for */
+      lockForm('You have already accepted. Tap below for your access card.');
+      setDownloadButton();
 
     } else if(res.found && res.responded === 'No'){
       /* Already declined, and that cannot be undone from here. */
@@ -1097,10 +1175,8 @@ function handleRsvp(e){
       if(res.responded === 'Yes'){
         rsvpMode = 'download';
         cardData = {name: res.name, phone: payload.phone, code: res.code, admits: res.admits || 1};
-        lockForm('You have already accepted. Your access card is below.');
-        btn.textContent = 'Download access card';
-        btn.disabled = false;
-        primeCardAssets();
+        lockForm('You have already accepted. Tap below for your access card.');
+        setDownloadButton();
       } else {
         rsvpMode = 'locked';
         lockForm('You have already replied to this invitation.');
@@ -1287,9 +1363,9 @@ function cardAssetsReady(){
   return !!(window.jspdf && cardArtData);
 }
 
-function downloadCard(){
+function downloadCard(fromBtn){
   if(!cardData) return;
-  const btn = document.getElementById('cardBtn');
+  const btn = fromBtn || document.getElementById('cardBtn');
 
   /* Ready: build and hand over inside the tap, no awaiting. */
   if(cardAssetsReady()){
